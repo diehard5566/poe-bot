@@ -18,12 +18,15 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', async (req, res) => {
     res.send('HTTP POST request sent to the webhook URL!')
+
     // If the user sends a message to your bot, send a reply message
     if (req.body.events[0].type === 'message') {
         const accountName = req.body.events[0].message.text
         const getCharacter_url = `https://www.pathofexile.com/character-window/get-characters?accountName=${accountName}`
+
         let res
         let data
+        let dataString
         try {
             res = await fetch(getCharacter_url, {
                 method: 'GET',
@@ -34,24 +37,41 @@ app.post('/webhook', async (req, res) => {
                 },
             })
             data = await res.json()
+
+            dataString = JSON.stringify({
+                replyToken: req.body.events[0].replyToken,
+                messages: [
+                    {
+                        type: 'text',
+                        text: 'Hello, user',
+                    },
+                    {
+                        type: 'text',
+                        text: `帳號:${accountName},目前總共有${data.length}隻角色！`,
+                    },
+                ],
+            })
+
+            if (data.error) {
+                throw new Error('error')
+            }
         } catch (error) {
-            console.log(error)
+            // Message data, must be stringified
+            dataString = JSON.stringify({
+                replyToken: req.body.events[0].replyToken,
+                messages: [
+                    {
+                        type: 'text',
+                        text: 'Hello, user',
+                    },
+                    {
+                        type: 'text',
+                        text: `Wrong account name!`,
+                    },
+                ],
+            })
         }
 
-        // Message data, must be stringified
-        const dataString = JSON.stringify({
-            replyToken: req.body.events[0].replyToken,
-            messages: [
-                {
-                    type: 'text',
-                    text: 'Hello, user',
-                },
-                {
-                    type: 'text',
-                    text: `帳號:${accountName},目前總共有${data.length}隻角色！`,
-                },
-            ],
-        })
         console.log(dataString)
 
         // Request header
