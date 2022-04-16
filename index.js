@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
 const TOKEN = process.env.LINE_ACCESS_TOKEN
+const fetch = require('node-fetch')
 
 app.use(express.json())
 app.use(
@@ -15,10 +16,28 @@ app.get('/', (req, res) => {
     res.sendStatus(200)
 })
 
-app.post('/webhook', function (req, res) {
+app.post('/webhook', async (req, res) => {
     res.send('HTTP POST request sent to the webhook URL!')
     // If the user sends a message to your bot, send a reply message
-    if (req.body.events[0].type === 'message' && req.body.events[0].message.text === '你是誰') {
+    if (req.body.events[0].type === 'message') {
+        const accountName = req.body.events[0].message.text
+        const getCharacter_url = `https://www.pathofexile.com/character-window/get-characters?accountName=${accountName}`
+        let res
+        let data
+        try {
+            res = await fetch(getCharacter_url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)', // 👈
+                },
+            })
+            data = await res.json()
+        } catch (error) {
+            console.log(error)
+        }
+
         // Message data, must be stringified
         const dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
@@ -29,11 +48,12 @@ app.post('/webhook', function (req, res) {
                 },
                 {
                     type: 'text',
-                    text: '我是poe bot!',
+                    text: `帳號:${accountName},目前總共有${data.length}隻角色！`,
                 },
             ],
         })
         console.log(dataString)
+
         // Request header
         const headers = {
             'Content-Type': 'application/json',
