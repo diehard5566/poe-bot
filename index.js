@@ -43,7 +43,7 @@ app.post('/webhook', async (req, res) => {
                 messages: [
                     {
                         type: 'text',
-                        text: 'Hello, user',
+                        text: '你好啊,流亡者',
                     },
                     {
                         type: 'text',
@@ -62,17 +62,17 @@ app.post('/webhook', async (req, res) => {
                 messages: [
                     {
                         type: 'text',
-                        text: 'Hello, user',
+                        text: '你好啊,流亡者',
                     },
                     {
                         type: 'text',
-                        text: `Wrong account name!`,
+                        text: `痾....帳號:${accountName}不存在！！！`,
                     },
                 ],
             })
         }
 
-        console.log(dataString)
+        // console.log(dataString)
 
         // Request header
         const headers = {
