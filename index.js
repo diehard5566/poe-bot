@@ -29,11 +29,11 @@ app.post('/webhook', function (req, res) {
                 },
                 {
                     type: 'text',
-                    text: 'May I help you?',
+                    text: '我是poe bot!',
                 },
             ],
         })
-
+        console.log(dataString)
         // Request header
         const headers = {
             'Content-Type': 'application/json',
@@ -68,5 +68,5 @@ app.post('/webhook', function (req, res) {
 })
 
 app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`)
+    console.log(`poe-bot listening at http://localhost:${PORT}`)
 })
