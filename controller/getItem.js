@@ -15,6 +15,14 @@ const getItem = async (req, res, accountName, charName) => {
             },
         })
         data = await res.json()
+        // console.log(data)
+        const notEmptyName = data.items.filter(e => {
+            if (e.name != '') {
+                return e.name
+            }
+        })
+        const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`, '\n')
+        console.log(items)
 
         dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
@@ -25,7 +33,7 @@ const getItem = async (req, res, accountName, charName) => {
                 },
                 {
                     type: 'text',
-                    text: `帳號:${accountName},目前總共有${data.length}隻角色！`,
+                    text: `這是全身裝備(不含藥水、珠寶、技能):${items}`,
                 },
             ],
         })
@@ -44,10 +52,11 @@ const getItem = async (req, res, accountName, charName) => {
                 },
                 {
                     type: 'text',
-                    text: `痾....帳號:${accountName}不存在！！！`,
+                    text: `痾....好像有地方錯了`,
                 },
             ],
         })
+        console.log(error)
     }
 
     return dataString
