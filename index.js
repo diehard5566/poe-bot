@@ -72,7 +72,7 @@ app.post('/webhook', async (req, res) => {
             })
         }
 
-        // console.log(dataString)
+        console.log(dataString)
 
         // Request header
         const headers = {
