@@ -4,6 +4,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const TOKEN = process.env.LINE_ACCESS_TOKEN
 const fetch = require('node-fetch')
+const getData = require('./controller/getChar')
 
 app.use(express.json())
 app.use(
@@ -22,58 +23,9 @@ app.post('/webhook', async (req, res) => {
     // If the user sends a message to your bot, send a reply message
     if (req.body.events[0].type === 'message') {
         const accountName = req.body.events[0].message.text
-        const getCharacter_url = `https://www.pathofexile.com/character-window/get-characters?accountName=${accountName}`
 
-        let res
-        let data
-        let dataString
-        try {
-            res = await fetch(getCharacter_url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)', // 👈
-                },
-            })
-            data = await res.json()
-
-            dataString = JSON.stringify({
-                replyToken: req.body.events[0].replyToken,
-                messages: [
-                    {
-                        type: 'text',
-                        text: '你好啊,流亡者',
-                    },
-                    {
-                        type: 'text',
-                        text: `帳號:${accountName},目前總共有${data.length}隻角色！`,
-                    },
-                ],
-            })
-
-            if (data.error) {
-                throw new Error('error')
-            }
-        } catch (error) {
-            // Message data, must be stringified
-            dataString = JSON.stringify({
-                replyToken: req.body.events[0].replyToken,
-                messages: [
-                    {
-                        type: 'text',
-                        text: '你好啊,流亡者',
-                    },
-                    {
-                        type: 'text',
-                        text: `痾....帳號:${accountName}不存在！！！`,
-                    },
-                ],
-            })
-        }
-
+        const dataString = await getData(req, res, accountName)
         console.log(dataString)
-
         // Request header
         const headers = {
             'Content-Type': 'application/json',
