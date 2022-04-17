@@ -16,7 +16,7 @@ const getCharacter = async (req, res, accountName) => {
         })
         data = await res.json()
 
-        let charName = data.map(el => el.name)
+        let charName = data.map((el, i) => ` ${i + 1}. ${el.name} `)
 
         dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,

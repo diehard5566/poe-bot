@@ -26,6 +26,7 @@ app.post('/webhook', async (req, res) => {
 
         const dataString = await getData(req, res, accountName)
         console.log(dataString)
+
         // Request header
         const headers = {
             'Content-Type': 'application/json',
