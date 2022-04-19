@@ -31,7 +31,7 @@ const getCharacter = async (reqBody, res, accountName) => {
                 },
                 {
                     type: 'text',
-                    text: `角色名：${charName}`,
+                    text: '角色名：' + '\n' + charName,
                 },
             ],
         })
