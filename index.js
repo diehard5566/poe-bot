@@ -3,9 +3,9 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
 const TOKEN = process.env.LINE_ACCESS_TOKEN
-const fetch = require('node-fetch')
-const getData = require('./controller/getChar')
+const getChar = require('./controller/getChar')
 const getItem = require('./controller/getItem')
+const reSponse = require('./controller/response')
 
 app.use(express.json())
 app.use(
@@ -25,75 +25,20 @@ app.post('/webhook', async (req, res) => {
         const accountName = req.body.events[0].message.text.split('/')[0]
         const charName = req.body.events[0].message.text.split('/')[1]
 
+        const token = process.env.LINE_ACCESS_TOKEN
+
         const dataString = await getItem(req, res, accountName, charName)
         console.log(dataString)
 
-        // Request header
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + TOKEN,
-        }
-
-        // Options to pass into the request
-        const webhookOptions = {
-            hostname: 'api.line.me',
-            path: '/v2/bot/message/reply',
-            method: 'POST',
-            headers: headers,
-            body: dataString,
-        }
-
-        // Define request
-        const request = https.request(webhookOptions, res => {
-            res.on('data', d => {
-                process.stdout.write(d)
-            })
-        })
-
-        // Handle error
-        request.on('error', err => {
-            console.error(err)
-        })
-
-        // Send data
-        request.write(dataString)
-        request.end()
+        reSponse(dataString, token)
     } else if (req.body.events[0].type === 'message') {
         const accountName = req.body.events[0].message.text
 
-        const dataString = await getData(req, res, accountName)
+        const dataString = await getChar(req, res, accountName)
         console.log(dataString)
 
-        // Request header
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + TOKEN,
-        }
-
-        // Options to pass into the request
-        const webhookOptions = {
-            hostname: 'api.line.me',
-            path: '/v2/bot/message/reply',
-            method: 'POST',
-            headers: headers,
-            body: dataString,
-        }
-
-        // Define request
-        const request = https.request(webhookOptions, res => {
-            res.on('data', d => {
-                process.stdout.write(d)
-            })
-        })
-
-        // Handle error
-        request.on('error', err => {
-            console.error(err)
-        })
-
-        // Send data
-        request.write(dataString)
-        request.end()
+        //send request
+        reSponse(dataString, token)
     }
 })
 
