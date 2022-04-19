@@ -21,7 +21,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
                 return e.name
             }
         })
-        const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`, '\n')
+        const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`).join('\n')
 
         dataString = JSON.stringify({
             replyToken: reqBody.events[0].replyToken,
