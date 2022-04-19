@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-const getItem = async (req, res, accountName, charName) => {
+const getItem = async (reqBody, res, accountName, charName) => {
     const url = `https://www.pathofexile.com/character-window/get-items?accountName=${accountName}&character=${charName}`
 
     let data
@@ -22,10 +22,9 @@ const getItem = async (req, res, accountName, charName) => {
             }
         })
         const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`, '\n')
-        console.log(items)
 
         dataString = JSON.stringify({
-            replyToken: req.body.events[0].replyToken,
+            replyToken: reqBody.events[0].replyToken,
             messages: [
                 {
                     type: 'text',

@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-const getCharacter = async (req, res, accountName) => {
+const getCharacter = async (reqBody, res, accountName) => {
     const url = `https://www.pathofexile.com/character-window/get-characters?accountName=${accountName}`
 
     let data
@@ -19,7 +19,7 @@ const getCharacter = async (req, res, accountName) => {
         const charName = data.map((el, i) => ` ${i + 1}. ${el.name}`, '\n')
 
         dataString = JSON.stringify({
-            replyToken: req.body.events[0].replyToken,
+            replyToken: reqBody.events[0].replyToken,
             messages: [
                 {
                     type: 'text',
