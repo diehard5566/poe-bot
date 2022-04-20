@@ -85,10 +85,9 @@ const replyMsg = async (reqBody, res) => {
             console.log('dataString: ', dataString)
 
             reSponse(dataString, token)
+            storeInfo.clear()
         }
     }
 }
-
-storeInfo.clear()
 
 module.exports = replyMsg
