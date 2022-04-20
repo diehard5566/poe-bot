@@ -55,7 +55,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
                 },
                 {
                     type: 'text',
-                    text: `痾....好像有地方錯了`,
+                    text: '痾....好像有地方錯了,請回到第一動！',
                 },
             ],
         })
