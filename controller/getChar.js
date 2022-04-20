@@ -42,7 +42,7 @@ const getCharacter = async (reqBody, res, accountName) => {
     } catch (error) {
         // Message data, must be stringified
         dataString = JSON.stringify({
-            replyToken: req.body.events[0].replyToken,
+            replyToken: reqBody.events[0].replyToken,
             messages: [
                 {
                     type: 'text',

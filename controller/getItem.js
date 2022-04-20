@@ -16,11 +16,15 @@ const getItem = async (reqBody, res, accountName, charName) => {
         })
         data = await res.json()
         // console.log(data)
+
+        //TODO:把裝備後面加上它部位的名字(e.g. 頭盔/腰帶...)
+
         const notEmptyName = data.items.filter(e => {
             if (e.name != '') {
                 return e.name
             }
         })
+
         const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`).join('\n')
 
         dataString = JSON.stringify({
@@ -43,7 +47,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
     } catch (error) {
         // Message data, must be stringified
         dataString = JSON.stringify({
-            replyToken: req.body.events[0].replyToken,
+            replyToken: reqBody.events[0].replyToken,
             messages: [
                 {
                     type: 'text',
