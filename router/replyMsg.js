@@ -39,7 +39,7 @@ const replyMsg = async (reqBody, res) => {
         }
 
         //輸入角色名,取得身上裝備
-        if (commandParam[0] === '角色裝備') {
+        else if (commandParam[0] === '角色裝備') {
             Array.from(storeInfo.values()).map(value => (accountName = value))
 
             let charKey = '角色裝備-' + commandParam[1]
@@ -58,6 +58,18 @@ const replyMsg = async (reqBody, res) => {
 
             //把map清空
             storeInfo.clear()
+        } else {
+            const dataString = JSON.stringify({
+                replyToken: reqBody.events[0].replyToken,
+                messages: [
+                    {
+                        type: 'text',
+                        text: '請輸入：帳號+空格+你的帳號',
+                    },
+                ],
+            })
+            console.log(dataString)
+            reSponse(dataString, token)
         }
     }
 }

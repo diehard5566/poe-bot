@@ -35,7 +35,7 @@ const getCharacter = async (reqBody, res, accountName) => {
                 },
                 {
                     type: 'text',
-                    text: '接著請輸入角色裝備+空格+角色名稱',
+                    text: '接著請輸入：角色裝備+空格+角色名稱',
                 },
             ],
         })
