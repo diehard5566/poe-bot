@@ -64,7 +64,7 @@ const replyMsg = async (reqBody, res) => {
                 messages: [
                     {
                         type: 'text',
-                        text: '請輸入：帳號+空格+你的帳號',
+                        text: '請輸入：帳號+空格+要查詢的帳號！',
                     },
                 ],
             })

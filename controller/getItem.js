@@ -36,7 +36,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
                 },
                 {
                     type: 'text',
-                    text: '這是你的全身裝備列表(不含藥水、珠寶、技能):' + '\n' + items,
+                    text: '這是查詢的角色的全身裝備列表(不含藥水、珠寶、技能)：' + '\n' + items,
                 },
             ],
         })
