@@ -14,31 +14,34 @@ const token = process.env.LINE_ACCESS_TOKEN
 *if split[1] == "charinfo":
  *charInfoController()
  **/
+
 //用Map去存帳號
 const storeInfo = new Map()
 
 const replyMsg = async (reqBody, res) => {
     const reqBodyMsg = reqBody.events[0].type
+    const commandParam = reqBody.events[0].message.text.split(' ')
 
     const lineUserId = reqBody.events[0].source.userId
-     
-    const commandParam = reqBody.events[0].message.text.split(' ')
     let accountName
-    
+    let dataFromgetChar
+
     if (reqBodyMsg === 'message') {
         //把lienID跟帳號綁定
         //輸入帳號，取得角色列表
         if (commandParam[0] === '帳號') {
             storeInfo.set(`lineUserId: ${lineUserId}`, commandParam[1])
-            
-            // let accountValue = '帳號-' + commandParam[1]
-
-            // storeInfo.set(accountValue, accountValue.split('-')[1])
 
             accountName = storeInfo.get(`lineUserId: ${lineUserId}`)
-            console.log(storeInfo);
+            console.log('storeInfo:', storeInfo)
 
-            const dataString = await getChar(reqBody, res, accountName)
+            dataFromgetChar = await getChar(reqBody, res, accountName)
+            console.log('dataSrting:', dataFromgetChar[0])
+            console.log('charlist:', dataFromgetChar[1])
+            console.log('\n')
+            console.log(dataFromgetChar[1])
+
+            const dataString = dataFromgetChar[0] //await getChar(reqBody, res, accountName)
             console.log('dataString: ', dataString)
 
             //send request
@@ -48,21 +51,30 @@ const replyMsg = async (reqBody, res) => {
         //輸入角色名,取得身上裝備
         //TODO:選角色改成輸入號碼就好
         else if (commandParam[0] === '角色裝備') {
-            // Array.from(storeInfo.values()).map(value => (accountName = value))
             accountName = storeInfo.get(`lineUserId: ${lineUserId}`)
 
-            let charKey = `user:${lineUserId}'s charId: `+ commandParam[1]
-            storeInfo.set(charKey, charKey.split(': ')[1])
+            let charKey = `user:${lineUserId}'s charId: ` + commandParam[1]
+            console.log(charKey)
+
+            dataFromgetChar = await getChar(reqBody, res, accountName)
+
+            let newCharParam = dataFromgetChar[1]
+                .split(' ')
+                .slice(1)
+                .filter(el => el.slice(0, el.indexOf('.')) === commandParam[1])
+                .toString()
+
+            storeInfo.set(charKey, newCharParam.slice(newCharParam.indexOf('.') + 1)) //charKey.split(': ')[1]
+
             let charName = storeInfo.get(charKey)
 
-            console.log(storeInfo);
+            console.log(storeInfo)
 
             const dataString = await getItem(reqBody, res, accountName, charName)
             console.log('dataString: ', dataString)
 
             //send request
             reSponse(dataString, token)
-
         } else {
             const dataString = JSON.stringify({
                 replyToken: reqBody.events[0].replyToken,

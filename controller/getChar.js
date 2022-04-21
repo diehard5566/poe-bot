@@ -5,6 +5,7 @@ const getCharacter = async (reqBody, res, accountName) => {
 
     let data
     let dataString
+    let charNameInlist
     try {
         res = await fetch(url, {
             method: 'GET',
@@ -16,7 +17,7 @@ const getCharacter = async (reqBody, res, accountName) => {
         })
         data = await res.json()
 
-        let charNameInlist = data.map((el, i) => ` ${i + 1}. ${el.name}`).join('\n')
+        charNameInlist = data.map((el, i) => ` ${i + 1}.${el.name}`).join('\n')
 
         dataString = JSON.stringify({
             replyToken: reqBody.events[0].replyToken,
@@ -60,7 +61,7 @@ const getCharacter = async (reqBody, res, accountName) => {
         })
     }
 
-    return dataString
+    return [dataString, charNameInlist]
 }
 
 module.exports = getCharacter
