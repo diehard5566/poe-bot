@@ -17,7 +17,11 @@ const getCharacter = async (reqBody, res, accountName) => {
         })
         data = await res.json()
 
-        charNameInlist = data.map((el, i) => ` ${i + 1}.${el.name}`).join('\n')
+        let leagueData = data.filter(el => el.league === 'Archnemesis')
+
+        charNameInlist = leagueData.map((el, i) => ` ${i + 1}.${el.name}`).join('\n')
+
+        console.log(charNameInlist)
 
         dataString = JSON.stringify({
             replyToken: reqBody.events[0].replyToken,
@@ -28,7 +32,7 @@ const getCharacter = async (reqBody, res, accountName) => {
                 },
                 {
                     type: 'text',
-                    text: `帳號:${accountName},目前總共有${data.length}隻角色！`,
+                    text: `帳號:${accountName},這季總共有${leagueData.length}隻角色！`,
                 },
                 {
                     type: 'text',
@@ -36,7 +40,7 @@ const getCharacter = async (reqBody, res, accountName) => {
                 },
                 {
                     type: 'text',
-                    text: '接著請輸入：角色裝備+空格+角色名稱',
+                    text: '接著請輸入：角色裝備+空格+角色編號',
                 },
             ],
         })

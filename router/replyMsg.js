@@ -30,16 +30,12 @@ const replyMsg = async (reqBody, res) => {
         //把lienID跟帳號綁定
         //輸入帳號，取得角色列表
         if (commandParam[0] === '帳號') {
-            storeInfo.set(`lineUserId: ${lineUserId}`, commandParam[1])
+            storeInfo.set(`lineUserId-${lineUserId}`, commandParam[1])
 
-            accountName = storeInfo.get(`lineUserId: ${lineUserId}`)
+            accountName = storeInfo.get(`lineUserId-${lineUserId}`)
             console.log('storeInfo:', storeInfo)
 
             dataFromgetChar = await getChar(reqBody, res, accountName)
-            console.log('dataSrting:', dataFromgetChar[0])
-            console.log('charlist:', dataFromgetChar[1])
-            console.log('\n')
-            console.log(dataFromgetChar[1])
 
             const dataString = dataFromgetChar[0] //await getChar(reqBody, res, accountName)
             console.log('dataString: ', dataString)
@@ -51,10 +47,9 @@ const replyMsg = async (reqBody, res) => {
         //輸入角色名,取得身上裝備
         //TODO:選角色改成輸入號碼就好
         else if (commandParam[0] === '角色裝備') {
-            accountName = storeInfo.get(`lineUserId: ${lineUserId}`)
+            accountName = storeInfo.get(`lineUserId-${lineUserId}`)
 
-            let charKey = `user:${lineUserId}'s charId: ` + commandParam[1]
-            console.log(charKey)
+            let charKey = `user-${lineUserId}-charId` + commandParam[1]
 
             dataFromgetChar = await getChar(reqBody, res, accountName)
 
@@ -64,7 +59,7 @@ const replyMsg = async (reqBody, res) => {
                 .filter(el => el.slice(0, el.indexOf('.')) === commandParam[1])
                 .toString()
 
-            storeInfo.set(charKey, newCharParam.slice(newCharParam.indexOf('.') + 1)) //charKey.split(': ')[1]
+            storeInfo.set(charKey, newCharParam.slice(newCharParam.indexOf('.') + 1))
 
             let charName = storeInfo.get(charKey)
 
