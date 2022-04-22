@@ -1,4 +1,6 @@
 const fetch = require('node-fetch')
+const { replyForCharInfo, replyForCharNotFound } = require('../msgForRes/ReplyForGetChar')
+// const replyForCharNotFound =
 
 const storeCharInfo = new Map()
 
@@ -27,46 +29,15 @@ const getCharacter = async (reqBody, res, accountName) => {
 
         const nameInOrderList = leagueData.map((el, i) => ` ${i + 1}.${el.name}`).join('\n')
 
-        dataString = JSON.stringify({
-            replyToken: reqBody.events[0].replyToken,
-            messages: [
-                {
-                    type: 'text',
-                    text: '你好啊,流亡者',
-                },
-                {
-                    type: 'text',
-                    text: `帳號:${accountName},這季總共有${leagueData.length}隻角色！`,
-                },
-                {
-                    type: 'text',
-                    text: '角色名：' + '\n' + nameInOrderList,
-                },
-                {
-                    type: 'text',
-                    text: '接著請輸入：編號+空格+角色編號 例如："編號 2"',
-                },
-            ],
-        })
+        dataString = replyForCharInfo(reqBody, accountName, leagueData, nameInOrderList)
 
         if (data.error) {
             throw new Error('error')
         }
     } catch (error) {
         // Message data, must be stringified
-        dataString = JSON.stringify({
-            replyToken: reqBody.events[0].replyToken,
-            messages: [
-                {
-                    type: 'text',
-                    text: '你好啊,流亡者',
-                },
-                {
-                    type: 'text',
-                    text: `痾....帳號:${accountName}不存在！！！`,
-                },
-            ],
-        })
+        // replyForCharInfo(reqBody, accountName, leagueData, nameInOrderList)
+        dataString = replyForCharNotFound(reqBody, accountName)
     }
 
     return [dataString, charNameInlist, storeCharInfo]

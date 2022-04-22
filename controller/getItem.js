@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const { replyForCharItems, replyForGetItemErr, charNotHaveItem } = require('../msgForRes/replyForGetItem')
 
 const storeItem = new Map()
 
@@ -52,45 +53,19 @@ const getItem = async (reqBody, res, accountName, charName) => {
             .items.map((el, i) => ` ${i + 1}. ${el.name}`)
             .join('\n')
 
-        dataString = JSON.stringify({
-            replyToken: reqBody.events[0].replyToken,
-            messages: [
-                {
-                    type: 'text',
-                    text: '你好啊,流亡者',
-                },
-                {
-                    type: 'text',
-                    text:
-                        '這是查詢的角色的全身裝備列表(不含藥水、技能)：' +
-                        '\n' +
-                        items +
-                        '\n' +
-                        '珠寶： ' +
-                        '\n' +
-                        jewelInList,
-                },
-            ],
-        })
+        if (items.length === 0) {
+            dataString = charNotHaveItem(reqBody, items, jewelInList)
+        } else {
+            dataString = replyForCharItems(reqBody, items, jewelInList)
+        }
 
         if (data.error) {
             throw new Error('error')
         }
     } catch (error) {
         // Message data, must be stringified
-        dataString = JSON.stringify({
-            replyToken: reqBody.events[0].replyToken,
-            messages: [
-                {
-                    type: 'text',
-                    text: '你好啊,流亡者',
-                },
-                {
-                    type: 'text',
-                    text: '痾....好像有地方錯了,恢復上一動！',
-                },
-            ],
-        })
+        dataString = replyForGetItemErr(reqBody)
+
         console.log(error)
     }
 
