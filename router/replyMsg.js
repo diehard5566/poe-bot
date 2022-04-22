@@ -1,5 +1,5 @@
 const getChar = require('../controller/getChar')
-const getItem = require('../controller/getItem')
+const getItemFromGGG = require('../controller/getItem')
 const reSponse = require('../controller/resSetting')
 
 const token = process.env.LINE_ACCESS_TOKEN
@@ -59,6 +59,7 @@ const replyMsg = async (reqBody, res) => {
 
             console.log(storeInfo)
 
+            const getItem = getItemFromGGG[0]
             const dataString = await getItem(reqBody, res, accountName, charName)
             console.log('dataString: ', dataString)
 

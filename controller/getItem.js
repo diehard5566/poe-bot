@@ -22,6 +22,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
         // console.log(data)
 
         storeItem.set('itemFromCharData', data)
+        // console.log(storeItem.get('itemFromCharData'))
 
         //TODO:把裝備後面加上它部位的名字(e.g. 頭盔/腰帶...)非必要
 
@@ -72,4 +73,4 @@ const getItem = async (reqBody, res, accountName, charName) => {
     return dataString
 }
 
-module.exports = getItem
+module.exports = [getItem, storeItem]
