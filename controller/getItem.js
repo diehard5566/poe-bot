@@ -66,7 +66,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
                         '\n' +
                         items +
                         '\n' +
-                        '珠寶: ' +
+                        '珠寶： ' +
                         '\n' +
                         jewelInList,
                 },
