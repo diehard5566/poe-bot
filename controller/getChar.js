@@ -69,7 +69,7 @@ const getCharacter = async (reqBody, res, accountName) => {
         })
     }
 
-    return [dataString, charNameInlist]
+    return [dataString, charNameInlist, storeCharInfo]
 }
 
 module.exports = getCharacter
