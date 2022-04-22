@@ -1,5 +1,7 @@
 const fetch = require('node-fetch')
 
+const storeCharInfo = new Map()
+
 const getCharacter = async (reqBody, res, accountName) => {
     const url = `https://www.pathofexile.com/character-window/get-characters?accountName=${accountName}`
 
@@ -17,11 +19,13 @@ const getCharacter = async (reqBody, res, accountName) => {
         })
         data = await res.json()
 
-        let leagueData = data.filter(el => el.league === 'Archnemesis')
+        storeCharInfo.set('dataFromGGG', data)
 
-        charNameInlist = leagueData.map((el, i) => ` ${i + 1}.${el.name}`).join('\n')
+        let leagueData = storeCharInfo.get('dataFromGGG').filter(el => el.league === 'Archnemesis')
 
-        console.log(charNameInlist)
+        charNameInlist = leagueData.map(el => el.name)
+
+        const nameInOrderList = leagueData.map((el, i) => ` ${i + 1}.${el.name}`).join('\n')
 
         dataString = JSON.stringify({
             replyToken: reqBody.events[0].replyToken,
@@ -36,7 +40,7 @@ const getCharacter = async (reqBody, res, accountName) => {
                 },
                 {
                     type: 'text',
-                    text: '角色名：' + '\n' + charNameInlist,
+                    text: '角色名：' + '\n' + nameInOrderList,
                 },
                 {
                     type: 'text',

@@ -20,13 +20,17 @@ const getItem = async (reqBody, res, accountName, charName) => {
         data = await res.json()
         // console.log(data)
 
+        storeItem.set('itemFromCharData', data)
+
         //TODO:把裝備後面加上它部位的名字(e.g. 頭盔/腰帶...)非必要
 
-        const notEmptyName = data.items.filter(e => {
+        const notEmptyName = storeItem.get('itemFromCharData').items.filter(e => {
             if (e.name != '') {
                 return e.name
             }
         })
+
+        const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`).join('\n')
 
         //天賦樹上的珠寶
         const jewelUrl = `https://www.pathofexile.com/character-window/get-passive-skills?accountName=${accountName}&character=${charName}&reqData=1`
@@ -41,14 +45,12 @@ const getItem = async (reqBody, res, accountName, charName) => {
         })
         jewelData = await res.json()
 
-        storeItem.set('itemFromCharData', data)
         storeItem.set('itemFromJewelData', jewelData)
-        console.log(storeItem)
 
-        const jewelInList = jewelData.items.map((el, i) => ` ${i + 1}. ${el.name}`).join('\n')
-        console.log(jewelInList)
-
-        const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`).join('\n')
+        const jewelInList = storeItem
+            .get('itemFromJewelData')
+            .items.map((el, i) => ` ${i + 1}. ${el.name}`)
+            .join('\n')
 
         dataString = JSON.stringify({
             replyToken: reqBody.events[0].replyToken,
@@ -59,7 +61,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
                 },
                 {
                     type: 'text',
-                    text: '這是查詢的角色的全身裝備列表(不含藥水、珠寶、技能)：' + '\n' + items,
+                    text: '這是查詢的角色的全身裝備列表(不含藥水、技能)：' + '\n' + items + '珠寶' + jewelInList,
                 },
             ],
         })

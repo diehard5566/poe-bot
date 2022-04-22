@@ -53,13 +53,7 @@ const replyMsg = async (reqBody, res) => {
 
             dataFromgetChar = await getChar(reqBody, res, accountName)
 
-            let newCharParam = dataFromgetChar[1]
-                .split(' ')
-                .slice(1)
-                .filter(el => el.slice(0, el.indexOf('.')) === commandParam[1])
-                .toString()
-
-            storeInfo.set(charKey, newCharParam.slice(newCharParam.indexOf('.') + 1))
+            storeInfo.set(charKey, dataFromgetChar[1][commandParam[1] - 1])
 
             let charName = storeInfo.get(charKey)
 
@@ -86,4 +80,4 @@ const replyMsg = async (reqBody, res) => {
     }
 }
 
-module.exports = replyMsg
+module.exports = [replyMsg, storeInfo]
