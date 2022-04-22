@@ -46,7 +46,7 @@ const replyMsg = async (reqBody, res) => {
 
         //輸入角色名,取得身上裝備
         //TODO:選角色改成輸入號碼就好
-        else if (commandParam[0] === '角色裝備') {
+        else if (commandParam[0] === '編號') {
             accountName = storeInfo.get(`lineUserId-${lineUserId}`)
 
             let charKey = `user-${lineUserId}-charId` + commandParam[1]
