@@ -1,7 +1,10 @@
+const fetch = require('node-fetch')
 const getChar = require('../controller/getChar')
 const getItemFromGGG = require('../controller/getItem')
 const reSponse = require('../controller/resSetting')
 const tranferData = require('../searchapi/transferData')
+const getItemForSearch = require('../searchapi/searchJson')
+const { response } = require('express')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -81,9 +84,45 @@ const replyMsg = async (reqBody, res) => {
                 // console.log('我是存在Map裡面的每個item：', storeEachItemInfo)
             }
             const singleItem = storeEachItemInfo.get(`item-No${commandParam[1]}`)
-            console.log('我是user選的單一裝備：', singleItem)
+            // console.log('我是user選的單一裝備：', singleItem)
 
             //TODO 把singleItem丟進searchJson function去轉成JSON 最後會回給user的是URL
+
+            const searchJsonReady = await getItemForSearch(singleItem)
+            // console.log('我是要被丟去給ggg的JSON: ', searchJsonReady)
+
+            const requestOption = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)',
+                },
+                body: JSON.stringify(searchJsonReady),
+            }
+            try {
+                const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
+                const data = await res.json()
+                // console.log(data)
+                // const resultLines = data.result.join(',')
+                // console.log(resultLines)
+                const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${data.id}`
+
+                const dataString = JSON.stringify({
+                    replyToken: reqBody.events[0].replyToken,
+                    messages: [
+                        {
+                            type: 'text',
+                            text: `${trade_URL}`,
+                        },
+                    ],
+                })
+
+                console.log(dataString)
+                reSponse(dataString, token)
+            } catch (error) {
+                console.log(error)
+            }
         } else {
             const dataString = JSON.stringify({
                 replyToken: reqBody.events[0].replyToken,

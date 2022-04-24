@@ -104,8 +104,8 @@ const tranferData = storeItem => {
             // sockets: el.sockets.filter(e => e.group === 0).length,
             // implicitMods: el.implicitMods,
             explicitMods: el.explicitMods,
-            influences: el.influences,
-            inventoryId: el.inventoryId,
+            // influences: el.influences,
+            // baseType: el.properties.filter(e => e[0].name),
         }))
 
     // console.log('itemWithNeeded: ', itemWithNeeded)
