@@ -4,7 +4,6 @@ const getItemFromGGG = require('../controller/getItem')
 const reSponse = require('../controller/resSetting')
 const tranferData = require('../controller/searchapi/transferData')
 const getItemForSearch = require('../controller/searchapi/searchJson')
-const { response } = require('express')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -58,6 +57,7 @@ const replyMsg = async (reqBody, res) => {
 
             //send request
             reSponse(dataString, token)
+
             //輸入裝備編號,取得各個裝備的賣場搜尋結果
         } else if (commandParam[0] === '裝備') {
             const getAllItem = getItemFromGGG[1]
@@ -75,7 +75,7 @@ const replyMsg = async (reqBody, res) => {
             const singleItem = storeEachItemInfo.get(`item-No${commandParam[1]}`)
             // console.log('我是user選的單一裝備：', singleItem)
 
-            //TODO 把singleItem丟進searchJson function去轉成JSON 最後會回給user的是URL
+            //把singleItem丟進searchJson function去轉成JSON 最後會回給user的是URL
 
             const searchJsonReady = await getItemForSearch(singleItem)
             // console.log('我是要被丟去給ggg的JSON: ', searchJsonReady)
@@ -95,7 +95,10 @@ const replyMsg = async (reqBody, res) => {
                 // console.log(data)
                 // const resultLines = data.result.join(',')
                 // console.log(resultLines)
-                const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${data.id}`
+                storeEachItemInfo.set(`trade-URL-${data.id}`, data.id)
+                const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeEachItemInfo.get(
+                    `trade-URL-${data.id}`
+                )}`
 
                 const dataString = JSON.stringify({
                     replyToken: reqBody.events[0].replyToken,
@@ -111,22 +114,6 @@ const replyMsg = async (reqBody, res) => {
                 reSponse(dataString, token)
             } catch (error) {
                 console.log(error)
-                const dataString = JSON.stringify({
-                    replyToken: reqBody.events[0].replyToken,
-                    messages: [
-                        {
-                            type: 'text',
-                            text: '痾....好像有地方錯了,恢復上一動！',
-                        },
-                        {
-                            type: 'text',
-                            text: '請輸入：帳號+空格+要查詢的帳號！ 例如："帳號 xxxxx"',
-                        },
-                    ],
-                })
-                console.log(dataString)
-
-                reSponse(dataString, token)
             }
         } else {
             const dataString = JSON.stringify({

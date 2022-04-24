@@ -25,8 +25,6 @@ const getItem = async (reqBody, res, accountName, charName) => {
         storeItem.set('itemFromCharData', data)
         // console.log(storeItem.get('itemFromCharData'))
 
-        //TODO:把裝備後面加上它部位的名字(e.g. 頭盔/腰帶...)非必要
-
         const notEmptyName = storeItem.get('itemFromCharData').items.filter(e => {
             if (e.name != '') {
                 return e.name
