@@ -8,17 +8,6 @@ const { response } = require('express')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
-/**
- *TODO:
- 是只有專門在拆 accountname/charname 這樣就可以做類似 route 的事情了
- -只是是用 if 判斷
- *要去執行哪個 controller
- *if split[0] == "userinfo":
- *    userInfoController()
-*if split[1] == "charinfo":
- *charInfoController()
- **/
-
 //用Map去存帳號
 const storeInfo = new Map()
 const storeEachItemInfo = new Map()
@@ -122,6 +111,19 @@ const replyMsg = async (reqBody, res) => {
                 reSponse(dataString, token)
             } catch (error) {
                 console.log(error)
+                const dataString = JSON.stringify({
+                    replyToken: reqBody.events[0].replyToken,
+                    messages: [
+                        {
+                            type: 'text',
+                            text: '痾....好像有地方錯了,恢復上一動！',
+                        },
+                        {
+                            type: 'text',
+                            text: '請輸入：帳號+空格+要查詢的帳號！ 例如："帳號 xxxxx"',
+                        },
+                    ],
+                })
             }
         } else {
             const dataString = JSON.stringify({
