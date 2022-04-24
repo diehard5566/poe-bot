@@ -33,7 +33,8 @@ const getItem = async (reqBody, res, accountName, charName) => {
             }
         })
 
-        const items = notEmptyName.map((el, i) => ` ${i + 1}. ${el.name}`).join('\n')
+        const items = notEmptyName.map((el, i) => ` ${i + 1}.${el.name}(${el.inventoryId})`).join('\n')
+        console.log(items)
 
         //天賦樹上的珠寶
         const jewelUrl = `https://www.pathofexile.com/character-window/get-passive-skills?accountName=${accountName}&character=${charName}&reqData=1`
