@@ -1,7 +1,7 @@
-const getItemFromGGG = require('../controller/getItem')
+const getItemFromGGG = require('../getItem')
 const storeItem = getItemFromGGG[1]
-const { exMods, imMods } = require('../searchapi/filterMod')
-let tradeAPIStats = require('../src/tradeAPI-stats.json')
+const { exMods, imMods } = require('./filterMod')
+let tradeAPIStats = require('../../src/tradeAPI-stats.json')
 
 // const items = [
 //     {

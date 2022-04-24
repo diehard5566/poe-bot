@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const { replyForCharItems, replyForGetItemErr, charNotHaveItem } = require('../msgForRes/replyForGetItem')
+const { replyForCharItems, replyForGetItemErr, charNotHaveItem } = require('../src/msgForRes/replyForGetItem')
 
 const storeItem = new Map()
 

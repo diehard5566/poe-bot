@@ -2,8 +2,8 @@ const fetch = require('node-fetch')
 const getChar = require('../controller/getChar')
 const getItemFromGGG = require('../controller/getItem')
 const reSponse = require('../controller/resSetting')
-const tranferData = require('../searchapi/transferData')
-const getItemForSearch = require('../searchapi/searchJson')
+const tranferData = require('../controller/searchapi/transferData')
+const getItemForSearch = require('../controller/searchapi/searchJson')
 const { response } = require('express')
 
 const token = process.env.LINE_ACCESS_TOKEN
