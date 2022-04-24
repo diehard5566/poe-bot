@@ -1,8 +1,9 @@
 const https = require('https')
+require('express-async-errors')
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
-// const replyMsg = require('./router/replyMsg')
+const errMiddleware = require('./middle/error-handler')
 const reply = require('./router/replyMsg')
 
 app.use(express.json())
@@ -11,6 +12,8 @@ app.use(
         extended: true,
     })
 )
+
+app.use(errMiddleware)
 
 app.get('/', (req, res) => {
     res.sendStatus(200)

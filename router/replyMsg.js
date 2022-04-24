@@ -124,6 +124,9 @@ const replyMsg = async (reqBody, res) => {
                         },
                     ],
                 })
+                console.log(dataString)
+
+                reSponse(dataString, token)
             }
         } else {
             const dataString = JSON.stringify({

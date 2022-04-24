@@ -38,15 +38,18 @@ const getItemForSearch = async singleItem => {
             price: 'asc',
         },
     }
+    try {
+        const exp = await singleItem.explicitMods
 
-    const exp = singleItem.explicitMods
-
-    for (let i = 0; i < exp.length; i++) {
-        searchJson_Def.query.stats[0].filters.push({
-            id: exp[i],
-            disable: false,
-            value: { min: 1 },
-        })
+        for (let i = 0; i < exp.length; i++) {
+            searchJson_Def.query.stats[0].filters.push({
+                id: exp[i],
+                disable: false,
+                value: { min: 1 },
+            })
+        }
+    } catch (error) {
+        console.log(error)
     }
 
     // if (singleItem.inventoryId === 'Ring' || singleItem.inventoryId === 'Ring2') {
