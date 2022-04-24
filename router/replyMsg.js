@@ -70,7 +70,7 @@ const replyMsg = async (reqBody, res) => {
                 const eachItemKey = transferedData[i]
                 // console.log(eachItem)
                 storeInfo.set(`user-${lineUserId}-item-No${i + 1}`, eachItemKey)
-                console.log('我是存在Map裡面的每個item：', storeInfo)
+                // console.log('我是存在Map裡面的每個item：', storeInfo)
             }
 
             const singleItem = storeInfo.get(`user-${lineUserId}-item-No${commandParam[1]}`)
