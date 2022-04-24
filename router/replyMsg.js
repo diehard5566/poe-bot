@@ -96,9 +96,9 @@ const replyMsg = async (reqBody, res) => {
                 // console.log(data)
                 // const resultLines = data.result.join(',')
                 // console.log(resultLines)
-                storeEachItemInfo.set(`trade-URL-${data.id}`, data.id)
-                const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeEachItemInfo.get(
-                    `trade-URL-${data.id}`
+                storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
+                const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
+                    `user-${lineUserId}-trade-URL-${data.id}`
                 )}`
 
                 const dataString = JSON.stringify({
