@@ -9,6 +9,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
     let data
     let dataString
     let jewelData
+    //身上各個裝備
     try {
         res = await fetch(url, {
             method: 'GET',

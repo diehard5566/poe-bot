@@ -1,6 +1,7 @@
 const getChar = require('../controller/getChar')
 const getItemFromGGG = require('../controller/getItem')
 const reSponse = require('../controller/resSetting')
+const tranferData = require('../searchapi/transferData')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -17,6 +18,7 @@ const token = process.env.LINE_ACCESS_TOKEN
 
 //用Map去存帳號
 const storeInfo = new Map()
+const storeEachItemInfo = new Map()
 
 const replyMsg = async (reqBody, res) => {
     const reqBodyMsg = reqBody.events[0].type
@@ -44,8 +46,7 @@ const replyMsg = async (reqBody, res) => {
             reSponse(dataString, token)
         }
 
-        //輸入角色名,取得身上裝備
-        //TODO:選角色改成輸入號碼就好
+        //輸入角色編號,取得身上裝備
         else if (commandParam[0] === '編號') {
             accountName = storeInfo.get(`lineUserId-${lineUserId}`)
 
@@ -65,6 +66,24 @@ const replyMsg = async (reqBody, res) => {
 
             //send request
             reSponse(dataString, token)
+            //輸入裝備編號,取得各個裝備的賣場搜尋結果
+        } else if (commandParam[0] === '裝備') {
+            const getAllItem = getItemFromGGG[1]
+            // console.log('我是該角色全部裝備data', getAllItem)
+
+            const transferedData = tranferData(getAllItem)
+            // console.log('我是裝備細節：', transferedData)
+
+            for (let i = 0; i < transferedData.length; i++) {
+                const eachItem = transferedData[i]
+                // console.log(eachItem)
+                storeEachItemInfo.set(`item-No${i + 1}`, eachItem)
+                // console.log('我是存在Map裡面的每個item：', storeEachItemInfo)
+            }
+            const singleItem = storeEachItemInfo.get(`item-No${commandParam[1]}`)
+            console.log('我是user選的單一裝備：', singleItem)
+
+            //TODO 把singleItem丟進searchJson function去轉成JSON 最後會回給user的是URL
         } else {
             const dataString = JSON.stringify({
                 replyToken: reqBody.events[0].replyToken,

@@ -8,14 +8,11 @@ const replyForCharItems = (reqBody, items, jewelInList) => {
             },
             {
                 type: 'text',
-                text:
-                    '這是查詢的角色的全身裝備列表(不含藥水、技能)：' +
-                    '\n' +
-                    items +
-                    '\n' +
-                    '珠寶： ' +
-                    '\n' +
-                    jewelInList,
+                text: '這是查詢的角色的全身裝備列表(不含藥水、技能)：' + '\n' + items,
+                // '\n' +
+                // '珠寶： ' +
+                // '\n' +
+                // jewelInList,
             },
         ],
     })
