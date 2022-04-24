@@ -110,8 +110,9 @@ const tranferData = storeItem => {
 
     // console.log('itemWithNeeded: ', itemWithNeeded)
     //把需要convert的地方抽出來
-    const explicitMods = itemWithNeeded.map(el => el.explicitMods)
+    const explicitMods = itemWithNeeded.filter(el => el.explicitMods != undefined)
     // const implicitMods = itemWithNeeded.map(el => el.implicitMods)
+    // console.log(explicitMods)
 
     //把stats對照表抽出來
     const objExplicit = tradeAPIStats.result.filter(e => e.label === 'Explicit')
@@ -120,6 +121,16 @@ const tranferData = storeItem => {
     //進行對照
     const eachItemExplicit = exMods(explicitMods, objExplicit)
     // const eachItemImplicit = imMods(implicitMods, objImplicit)
+    // console.log('我是對照後的：', eachItemExplicit)
+
+    //把結果放回原本的表內
+    itemWithNeeded
+        .filter(el => el.explicitMods != undefined)
+        .map(
+            (el, index) => (el.explicitMods = eachItemExplicit[index].flat()) //&& (el.implicitMods = eachItemImplicit[index].flat()
+        )
+    // console.log('convertExplicit: ', itemWithNeeded)
+    return itemWithNeeded
 
     // let explicitModsWithId = []
     // for (let i = 0; i < explicitMods.length; i++) {
@@ -137,13 +148,6 @@ const tranferData = storeItem => {
     //     explicitModsWithId.push(eachItemId)
     // }
     // console.log('explicitModsWithId:', explicitModsWithId)
-
-    //把結果放回原本的表內
-    itemWithNeeded.forEach(
-        (el, index) => (el.explicitMods = eachItemExplicit[index].flat()) //&& (el.implicitMods = eachItemImplicit[index].flat()
-    )
-    // console.log('convertExplicit: ', itemWithNeeded)
-    return itemWithNeeded
 }
 
 module.exports = tranferData
