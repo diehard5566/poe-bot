@@ -12,7 +12,7 @@ const replyForCharItems = (reqBody, items, jewelInList) => {
             },
             {
                 type: 'text',
-                text: '請輸入要查詢的裝備與編號！ 例如："裝備 1"',
+                text: '請輸入:"裝備"(不需要加其他東西,否則無法接收指令),並等候查詢結果！',
             },
         ],
     })
