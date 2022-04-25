@@ -64,7 +64,7 @@ const replyMsg = async (reqBody, res) => {
             // console.log('我是該角色全部裝備data', getAllItem)
 
             const transferedData = tranferData(getAllItem)
-            // console.log('我是裝備細節：', transferedData)
+            // console.log('我是裝備細節：', transferedData.length)
 
             for (let i = 0; i < transferedData.length; i++) {
                 const eachItemKey = transferedData[i]
@@ -73,48 +73,60 @@ const replyMsg = async (reqBody, res) => {
                 // console.log('我是存在Map裡面的每個item：', storeInfo)
             }
 
-            const singleItem = storeInfo.get(`user-${lineUserId}-item-No${commandParam[1]}`)
-            // console.log('我是user選的單一裝備：', singleItem)
+            let allItem
+            for (let i = 1; i < transferedData.length + 1; i++) {
+                console.log(i)
+                allItem = storeInfo.get(`user-${lineUserId}-item-No${i}`)
+                console.log('我是存在storeInfo裡的item: ', allItem)
 
-            //把singleItem丟進searchJson function去轉成JSON 最後會回給user的是URL
+                // const singleItem = storeInfo.get(`user-${lineUserId}-item-No${commandParam[1]}`)
+                // console.log('我是user選的單一裝備：', singleItem)
 
-            const searchJsonReady = await getItemForSearch(singleItem)
-            // console.log('我是要被丟去給ggg的JSON: ', searchJsonReady)
+                //把詞綴丟進searchJson function去轉成JSON 最後會回給user的是URL
+                const searchJsonReady = await getItemForSearch(allItem) //singleItem
+                console.log(i + '.我是要被丟去給ggg的JSON: ', searchJsonReady)
 
-            const requestOption = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)',
-                },
-                body: JSON.stringify(searchJsonReady),
-            }
-            try {
-                const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
-                const data = await res.json()
-                // console.log(data)
-                // const resultLines = data.result.join(',')
-                // console.log(resultLines)
-                storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
-                const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
-                    `user-${lineUserId}-trade-URL-${data.id}`
-                )}`
+                const requestOption = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)',
+                    },
+                    body: JSON.stringify(searchJsonReady),
+                }
+                try {
+                    const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
-                const dataString = JSON.stringify({
-                    replyToken: reqBody.events[0].replyToken,
-                    messages: [
-                        {
-                            type: 'text',
-                            text: `${trade_URL}`,
-                        },
-                    ],
-                })
+                    const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
+                    await delay(2000)
+                    const data = await res.json()
+                    // console.log(data)
+                    // const resultLines = data.result.join(',')
+                    // console.log(resultLines)
+                    storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
+                    const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
+                        `user-${lineUserId}-trade-URL-${data.id}`
+                    )}`
+                    const dataString = JSON.stringify({
+                        replyToken: reqBody.events[0].replyToken,
+                        messages: [
+                            {
+                                type: 'text',
+                                text: `請稍後...`,
+                            },
+                            {
+                                type: 'text',
+                                text: `${trade_URL}`,
+                            },
+                        ],
+                    })
 
-                console.log(dataString)
-                reSponse(dataString, token)
-            } catch (error) {
-                console.log(error)
+                    console.log(dataString)
+                    reSponse(dataString, token)
+                } catch (error) {
+                    console.log(error)
+                }
             }
         } else {
             const dataString = JSON.stringify({
