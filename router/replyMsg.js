@@ -100,7 +100,7 @@ const replyMsg = async (reqBody, res) => {
                     const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
                     const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
-                    await delay(2000)
+                    await delay(1000)
                     const data = await res.json()
                     // console.log(data)
                     // const resultLines = data.result.join(',')
@@ -122,7 +122,7 @@ const replyMsg = async (reqBody, res) => {
                 messages: [
                     {
                         type: 'text',
-                        text: `請稍後...`,
+                        text: `感謝您的耐心等候！`,
                     },
                     {
                         type: 'text',
