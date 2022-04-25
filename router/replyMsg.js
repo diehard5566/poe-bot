@@ -74,6 +74,7 @@ const replyMsg = async (reqBody, res) => {
             }
 
             let allItem
+            let allResultURL = []
             for (let i = 1; i < transferedData.length + 1; i++) {
                 console.log(i)
                 allItem = storeInfo.get(`user-${lineUserId}-item-No${i}`)
@@ -108,26 +109,30 @@ const replyMsg = async (reqBody, res) => {
                     const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
                         `user-${lineUserId}-trade-URL-${data.id}`
                     )}`
-                    const dataString = JSON.stringify({
-                        replyToken: reqBody.events[0].replyToken,
-                        messages: [
-                            {
-                                type: 'text',
-                                text: `請稍後...`,
-                            },
-                            {
-                                type: 'text',
-                                text: `${trade_URL}`,
-                            },
-                        ],
-                    })
 
-                    console.log(dataString)
-                    reSponse(dataString, token)
+                    allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
                 } catch (error) {
                     console.log(error)
                 }
             }
+
+            console.log(allResultURL)
+            const dataString = JSON.stringify({
+                replyToken: reqBody.events[0].replyToken,
+                messages: [
+                    {
+                        type: 'text',
+                        text: `請稍後...`,
+                    },
+                    {
+                        type: 'text',
+                        text: `${allResultURL}`,
+                    },
+                ],
+            })
+
+            console.log(dataString)
+            reSponse(dataString, token)
         } else {
             const dataString = JSON.stringify({
                 replyToken: reqBody.events[0].replyToken,
