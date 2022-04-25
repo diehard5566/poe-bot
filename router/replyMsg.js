@@ -1,9 +1,11 @@
 const fetch = require('node-fetch')
-const getChar = require('../controller/getChar')
-const getItemFromGGG = require('../controller/getItem')
+const getChar = require('../module/Char')
+const getItemFromGGG = require('../module/Item')
+const allItemURL = require('../module/allItemURL')
 const reSponse = require('../controller/resSetting')
 const tranferData = require('../controller/searchapi/transferData')
 const getItemForSearch = require('../controller/searchapi/searchJson')
+const { replyForResult, replyDefaultMsg } = require('../src/msgForRes/replyForGetItem')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -76,9 +78,8 @@ const replyMsg = async (reqBody, res) => {
             let allItem
             let allResultURL = []
             for (let i = 1; i < transferedData.length + 1; i++) {
-                console.log(i)
                 allItem = storeInfo.get(`user-${lineUserId}-item-No${i}`)
-                console.log('我是存在storeInfo裡的item: ', allItem)
+                // console.log('我是存在storeInfo裡的item: ', allItem)
 
                 // const singleItem = storeInfo.get(`user-${lineUserId}-item-No${commandParam[1]}`)
                 // console.log('我是user選的單一裝備：', singleItem)
@@ -87,62 +88,43 @@ const replyMsg = async (reqBody, res) => {
                 const searchJsonReady = await getItemForSearch(allItem) //singleItem
                 console.log(i + '.我是要被丟去給ggg的JSON: ', searchJsonReady)
 
-                const requestOption = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Accept: 'application/json',
-                        'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)',
-                    },
-                    body: JSON.stringify(searchJsonReady),
-                }
-                try {
-                    const delay = time => new Promise(resolve => setTimeout(resolve, time))
+                const data = await allItemURL(searchJsonReady)
+                // const requestOption = {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         Accept: 'application/json',
+                //         'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)',
+                //     },
+                //     body: JSON.stringify(searchJsonReady),
+                // }
+                // try {
+                //     const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
-                    const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
-                    await delay(1000)
-                    const data = await res.json()
-                    // console.log(data)
-                    // const resultLines = data.result.join(',')
-                    // console.log(resultLines)
-                    storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
-                    const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
-                        `user-${lineUserId}-trade-URL-${data.id}`
-                    )}`
+                //     const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
+                //     await delay(900)
+                //     const data = await res.json()
+                //     // console.log(data)
+                //     // const resultLines = data.result.join(',')
+                //     // console.log(resultLines)
+                storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
+                const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
+                    `user-${lineUserId}-trade-URL-${data.id}`
+                )}`
 
-                    allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
-                } catch (error) {
-                    console.log(error)
-                }
+                allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
+                // } catch (error) {
+                //     console.log(error)
+                // }
             }
 
             console.log(allResultURL)
-            const dataString = JSON.stringify({
-                replyToken: reqBody.events[0].replyToken,
-                messages: [
-                    {
-                        type: 'text',
-                        text: `感謝您的耐心等候！`,
-                    },
-                    {
-                        type: 'text',
-                        text: `${allResultURL}`,
-                    },
-                ],
-            })
+            const dataString = replyForResult(reqBody, allResultURL)
 
             console.log(dataString)
             reSponse(dataString, token)
         } else {
-            const dataString = JSON.stringify({
-                replyToken: reqBody.events[0].replyToken,
-                messages: [
-                    {
-                        type: 'text',
-                        text: '請輸入：帳號+空格+要查詢的帳號！ 例如："帳號 xxxxx"',
-                    },
-                ],
-            })
+            const dataString = replyDefaultMsg(reqBody)
             console.log(dataString)
             reSponse(dataString, token)
         }

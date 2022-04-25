@@ -30,6 +30,42 @@ const charNotHaveItem = (reqBody, items, jewelInList) => {
     })
 }
 
+const replyForResult = (reqBody, allResultURL) => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: `感謝您的耐心等候！`,
+            },
+            {
+                type: 'text',
+                text: `${allResultURL}`,
+            },
+            {
+                type: 'text',
+                text: '此功能僅供簡易查詢,無法達到精準搜尋,如果搜不到裝備,請自行調整詞綴！',
+            },
+            {
+                type: 'text',
+                text: '如果網址結尾為undefined則代表查詢過多次,請過陣子再試試！',
+            },
+        ],
+    })
+}
+
+const replyDefaultMsg = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: '請輸入：帳號+空格+要查詢的帳號！ 例如："帳號 xxxxx"',
+            },
+        ],
+    })
+}
+
 const replyForGetItemErr = reqBody => {
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
@@ -46,4 +82,4 @@ const replyForGetItemErr = reqBody => {
     })
 }
 
-module.exports = { replyForCharItems, charNotHaveItem, replyForGetItemErr }
+module.exports = { replyForCharItems, charNotHaveItem, replyForResult, replyDefaultMsg, replyForGetItemErr }

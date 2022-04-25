@@ -1,4 +1,4 @@
-const getItemFromGGG = require('../getItem')
+const getItemFromGGG = require('../../module/Item')
 const { exMods, imMods } = require('./filterMod')
 let tradeAPIStats = require('../../src/tradeAPI-stats.json')
 
