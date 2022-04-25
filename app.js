@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
 const errMiddleware = require('./middle/error-handler')
-const reply = require('./router/replyMsg')
+const reply = require('./controller/replyMsg')
 
 app.use(express.json())
 app.use(

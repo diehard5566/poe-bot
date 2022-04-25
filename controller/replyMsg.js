@@ -1,11 +1,16 @@
-const fetch = require('node-fetch')
 const getChar = require('../module/Char')
 const getItemFromGGG = require('../module/Item')
-const allItemURL = require('../module/allItemURL')
-const reSponse = require('../controller/resSetting')
-const tranferData = require('../controller/searchapi/transferData')
-const getItemForSearch = require('../controller/searchapi/searchJson')
+const allItemURL = require('../module/URLfromGGG')
+const reSponse = require('./resSetting')
+const tranferData = require('../module/searchapi/transferData')
+const getItemForSearch = require('../module/searchapi/searchJson')
 const { replyForResult, replyDefaultMsg } = require('../src/msgForRes/replyForGetItem')
+// let Bottleneck = require('bottleneck/es5')
+
+// const limiter = new Bottleneck({
+//     maxConcurrent: 1,
+//     minTime: 2000,
+// })
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -50,7 +55,7 @@ const replyMsg = async (reqBody, res) => {
 
             let charName = storeInfo.get(charKey)
 
-            console.log(storeInfo)
+            // console.log(storeInfo)
 
             const getItem = getItemFromGGG[0]
             const dataString = await getItem(reqBody, res, accountName, charName)
@@ -81,41 +86,18 @@ const replyMsg = async (reqBody, res) => {
                 allItem = storeInfo.get(`user-${lineUserId}-item-No${i}`)
                 // console.log('我是存在storeInfo裡的item: ', allItem)
 
-                // const singleItem = storeInfo.get(`user-${lineUserId}-item-No${commandParam[1]}`)
-                // console.log('我是user選的單一裝備：', singleItem)
-
                 //把詞綴丟進searchJson function去轉成JSON 最後會回給user的是URL
                 const searchJsonReady = await getItemForSearch(allItem) //singleItem
                 console.log(i + '.我是要被丟去給ggg的JSON: ', searchJsonReady)
 
                 const data = await allItemURL(searchJsonReady)
-                // const requestOption = {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         Accept: 'application/json',
-                //         'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)',
-                //     },
-                //     body: JSON.stringify(searchJsonReady),
-                // }
-                // try {
-                //     const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
-                //     const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
-                //     await delay(900)
-                //     const data = await res.json()
-                //     // console.log(data)
-                //     // const resultLines = data.result.join(',')
-                //     // console.log(resultLines)
                 storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
                 const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
                     `user-${lineUserId}-trade-URL-${data.id}`
                 )}`
 
                 allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
-                // } catch (error) {
-                //     console.log(error)
-                // }
             }
 
             console.log(allResultURL)
