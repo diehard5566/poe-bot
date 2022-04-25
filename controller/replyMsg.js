@@ -91,7 +91,6 @@ const replyMsg = async (reqBody, res) => {
                 console.log(i + '.我是要被丟去給ggg的JSON: ', searchJsonReady)
 
                 const data = await allItemURL(searchJsonReady)
-
                 storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
                 const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
                     `user-${lineUserId}-trade-URL-${data.id}`
