@@ -4,7 +4,7 @@ const allItemURL = require('../module/URLfromGGG')
 const reSponse = require('./resSetting')
 const tranferData = require('../module/searchapi/transferData')
 const getItemForSearch = require('../module/searchapi/searchJson')
-const replyForResult = require('../src/msgForRes/replyForGetItem')
+const replyForResult = require('../src/msgForRes/replyForGetItem').replyForResult
 const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
 // let Bottleneck = require('bottleneck/es5')
@@ -28,11 +28,6 @@ const replyMsg = async (reqBody, res) => {
     let dataFromgetChar
 
     if (reqBodyMsg === 'message') {
-        // default msg
-        const dataString = replyDefaultMsg(reqBody)
-        console.log(dataString)
-        reSponse(dataString, token)
-
         //把lienID跟帳號綁定
         //輸入帳號，取得角色列表
         if (commandParam[0] === '帳號') {
@@ -48,10 +43,8 @@ const replyMsg = async (reqBody, res) => {
 
             //send request
             reSponse(dataString, token)
-        }
-
-        //輸入角色編號,取得身上裝備
-        if (commandParam[0] === '編號') {
+            //輸入角色編號,取得身上裝備
+        } else if (commandParam[0] === '編號') {
             accountName = storeInfo.get(`lineUserId-${lineUserId}`)
 
             let charKey = `user-${lineUserId}-charId` + commandParam[1]
@@ -72,9 +65,7 @@ const replyMsg = async (reqBody, res) => {
             reSponse(dataString, token)
 
             //輸入裝備編號,取得各個裝備的賣場搜尋結果
-        }
-
-        if (commandParam[0] === '裝備') {
+        } else if (commandParam[0] === '裝備') {
             // accountName = storeInfo.get(`lineUserId-${lineUserId}`)
             const getAllItem = getItemFromGGG[1]
             // console.log('我是該角色全部裝備data', getAllItem)
@@ -109,20 +100,26 @@ const replyMsg = async (reqBody, res) => {
             }
 
             console.log(allResultURL)
-            const dataString = await replyForResult(reqBody, allResultURL)
+            const dataString = replyForResult(reqBody, allResultURL)
 
             console.log(dataString)
             reSponse(dataString, token)
-        }
 
-        if (commandParam[0] === '通貨') {
+            //flex msg
+        } else if (commandParam[0] === '通貨') {
             const dataString = await replyFlexMsg(reqBody)
             console.log(dataString)
             reSponse(dataString, token)
-        }
 
-        if (commandParam[0] === '指令') {
+            //command
+        } else if (commandParam[0] === '指令') {
             const dataString = replyForCommand(reqBody)
+            console.log(dataString)
+            reSponse(dataString, token)
+        }
+        // default msg
+        else {
+            const dataString = replyDefaultMsg(reqBody)
             console.log(dataString)
             reSponse(dataString, token)
         }
