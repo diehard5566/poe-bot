@@ -5,6 +5,7 @@ const reSponse = require('./resSetting')
 const tranferData = require('../module/searchapi/transferData')
 const getItemForSearch = require('../module/searchapi/searchJson')
 const { replyForResult, replyDefaultMsg } = require('../src/msgForRes/replyForGetItem')
+const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 // let Bottleneck = require('bottleneck/es5')
 
 // const limiter = new Bottleneck({
@@ -102,6 +103,10 @@ const replyMsg = async (reqBody, res) => {
             console.log(allResultURL)
             const dataString = replyForResult(reqBody, allResultURL)
 
+            console.log(dataString)
+            reSponse(dataString, token)
+        } else if (commandParam[0] === '通貨') {
+            const dataString = replyFlexMsg(reqBody)
             console.log(dataString)
             reSponse(dataString, token)
         } else {
