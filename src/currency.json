@@ -11,13 +11,98 @@
                     "size": "5xl",
                     "aspectRatio": "20:13",
                     "aspectMode": "fit",
-                    "background": "#ffffff",
+                    "url": "https://img.usfine.biz/images/poe-currency/mirror-of-kalandra.png",
+                    "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://poe.ninja/challenge/currency/mirror-of-kalandra"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "md",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "Mirror of Kalandra",
+                            "wrap": true,
+                            "weight": "bold",
+                            "size": "xl",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "default:",
+                            "weight": "bold",
+                            "style": "normal",
+                            "margin": "lg",
+                            "size": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "(此價格為浮動價,詳情請點下方官方連結)",
+                            "weight": "bold",
+                            "size": "xs",
+                            "margin": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        }
+                    ],
+                    "backgroundColor": "#464F69",
+                    "margin": "none",
+                    "position": "relative",
+                    "borderWidth": "normal",
+                    "cornerRadius": "none",
+                    "paddingAll": "xxl"
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                                "type": "uri",
+                                "label": "買！買！買！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/wlYEm7KIb"
+                            },
+                            "margin": "none",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
+                        },
+                        {
+                            "type": "button",
+                            "action": {
+                                "type": "uri",
+                                "label": "賣！賣！賣！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/dkpQYEoFJ"
+                            },
+                            "style": "primary",
+                            "margin": "sm"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "size": "5xl",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "fit",
                     "url": "https://img.usfine.biz/images/poe-currency/exalted-orb.png",
                     "action": {
                         "type": "uri",
                         "label": "action",
                         "uri": "https://poe.ninja/challenge/currency/exalted-orb"
-                    }
+                    },
+                    "backgroundColor": "#ffffff"
                 },
                 "body": {
                     "type": "box",
@@ -73,9 +158,7 @@
                                 "label": "買！買！買！(Poe.trade)",
                                 "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/Nn8Vt0"
                             },
-                            "height": "md",
-                            "margin": "xxl",
-                            "position": "relative",
+                            "margin": "none",
                             "offsetTop": "none",
                             "offsetStart": "none"
                         },
@@ -83,10 +166,11 @@
                             "type": "button",
                             "action": {
                                 "type": "uri",
-                                "label": "賣(Poe.trade)",
+                                "label": "賣！賣！賣！(Poe.trade)",
                                 "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/12R5ck"
                             },
-                            "style": "primary"
+                            "style": "primary",
+                            "margin": "sm"
                         }
                     ]
                 }
@@ -98,7 +182,6 @@
                     "size": "5xl",
                     "aspectRatio": "20:13",
                     "aspectMode": "fit",
-                    "background": "#ffffff",
                     "url": "https://img.usfine.biz/images/poe-currency/orb-of-alteration.png",
                     "action": {
                         "type": "uri",
@@ -113,7 +196,7 @@
                     "contents": [
                         {
                             "type": "text",
-                            "text": "Orb Of Alt",
+                            "text": "Orb of Alteration",
                             "wrap": true,
                             "weight": "bold",
                             "size": "xl",
@@ -157,12 +240,10 @@
                             "style": "primary",
                             "action": {
                                 "type": "uri",
-                                "label": "買(Poe.trade)",
+                                "label": "買！買！買！(Poe.trade)",
                                 "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/AgBPhQ"
                             },
-                            "height": "md",
-                            "margin": "xxl",
-                            "position": "relative",
+                            "margin": "none",
                             "offsetTop": "none",
                             "offsetStart": "none"
                         },
@@ -170,10 +251,436 @@
                             "type": "button",
                             "action": {
                                 "type": "uri",
-                                "label": "賣(Poe.trade)",
+                                "label": "賣！賣！賣！(Poe.trade)",
                                 "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/NrE7IQ"
                             },
-                            "style": "primary"
+                            "style": "primary",
+                            "margin": "sm"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "size": "5xl",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "fit",
+                    "url": "https://img.usfine.biz/images/poe-currency/orb-of-scouring.png",
+                    "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://poe.ninja/challenge/currency/orb-of-scouring"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "md",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "Orb of Scouring",
+                            "wrap": true,
+                            "weight": "bold",
+                            "size": "xl",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "default:",
+                            "weight": "bold",
+                            "style": "normal",
+                            "margin": "lg",
+                            "size": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "(此價格為浮動價,詳情請點下方官方連結)",
+                            "weight": "bold",
+                            "size": "xs",
+                            "margin": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        }
+                    ],
+                    "backgroundColor": "#464F69",
+                    "margin": "none",
+                    "position": "relative",
+                    "borderWidth": "normal",
+                    "cornerRadius": "none",
+                    "paddingAll": "xxl"
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                                "type": "uri",
+                                "label": "買！買！買！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/rGw3K7zIQ"
+                            },
+                            "margin": "none",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
+                        },
+                        {
+                            "type": "button",
+                            "action": {
+                                "type": "uri",
+                                "label": "賣！賣！賣！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/lo4r0lnTV"
+                            },
+                            "style": "primary",
+                            "margin": "sm"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "size": "5xl",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "fit",
+                    "url": "https://img.usfine.biz/images/poe-currency/orb-of-fusing.png",
+                    "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://poe.ninja/challenge/currency/orb-of-fusing"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "md",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "Orb of Fusing",
+                            "wrap": true,
+                            "weight": "bold",
+                            "size": "xl",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "default:",
+                            "weight": "bold",
+                            "style": "normal",
+                            "margin": "lg",
+                            "size": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "(此價格為浮動價,詳情請點下方官方連結)",
+                            "weight": "bold",
+                            "size": "xs",
+                            "margin": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        }
+                    ],
+                    "backgroundColor": "#464F69",
+                    "margin": "none",
+                    "position": "relative",
+                    "borderWidth": "normal",
+                    "cornerRadius": "none",
+                    "paddingAll": "xxl"
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                                "type": "uri",
+                                "label": "買！買！買！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/NKkqT5"
+                            },
+                            "margin": "none",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
+                        },
+                        {
+                            "type": "button",
+                            "action": {
+                                "type": "uri",
+                                "label": "賣！賣！賣！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/Q3byJgvIw"
+                            },
+                            "style": "primary",
+                            "margin": "sm"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "size": "5xl",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "fit",
+                    "url": "https://img.usfine.biz/images/poe-currency/orb-of-regret.png",
+                    "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://poe.ninja/challenge/currency/orb-of-alteration"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "md",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "Orb of Regret",
+                            "wrap": true,
+                            "weight": "bold",
+                            "size": "xl",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "default:",
+                            "weight": "bold",
+                            "style": "normal",
+                            "margin": "lg",
+                            "size": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "(此價格為浮動價,詳情請點下方官方連結)",
+                            "weight": "bold",
+                            "size": "xs",
+                            "margin": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        }
+                    ],
+                    "backgroundColor": "#464F69",
+                    "margin": "none",
+                    "position": "relative",
+                    "borderWidth": "normal",
+                    "cornerRadius": "none",
+                    "paddingAll": "xxl"
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                                "type": "uri",
+                                "label": "買！買！買！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/zbJai4"
+                            },
+                            "margin": "none",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
+                        },
+                        {
+                            "type": "button",
+                            "action": {
+                                "type": "uri",
+                                "label": "賣！賣！賣！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/9z6ztK"
+                            },
+                            "style": "primary",
+                            "margin": "sm"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "size": "5xl",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "fit",
+                    "url": "https://img.usfine.biz/images/poe-currency/vaal-orb.png",
+                    "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://poe.ninja/challenge/currency/vaal-orb"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "md",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "Vaal Orb",
+                            "wrap": true,
+                            "weight": "bold",
+                            "size": "xl",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "default:",
+                            "weight": "bold",
+                            "style": "normal",
+                            "margin": "lg",
+                            "size": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "(此價格為浮動價,詳情請點下方官方連結)",
+                            "weight": "bold",
+                            "size": "xs",
+                            "margin": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        }
+                    ],
+                    "backgroundColor": "#464F69",
+                    "margin": "none",
+                    "position": "relative",
+                    "borderWidth": "normal",
+                    "cornerRadius": "none",
+                    "paddingAll": "xxl"
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                                "type": "uri",
+                                "label": "買！買！買！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/eyyoCL"
+                            },
+                            "margin": "none",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
+                        },
+                        {
+                            "type": "button",
+                            "action": {
+                                "type": "uri",
+                                "label": "賣！賣！賣！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/85B2TV"
+                            },
+                            "style": "primary",
+                            "margin": "sm"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "size": "5xl",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "fit",
+                    "url": "https://img.usfine.biz/images/poe-currency/orb-of-alchemy.png",
+                    "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": "https://poe.ninja/challenge/currency/orb-of-alchemy"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "md",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "Orb of Alchemy",
+                            "wrap": true,
+                            "weight": "bold",
+                            "size": "xl",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "default:",
+                            "weight": "bold",
+                            "style": "normal",
+                            "margin": "lg",
+                            "size": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": "(此價格為浮動價,詳情請點下方官方連結)",
+                            "weight": "bold",
+                            "size": "xs",
+                            "margin": "lg",
+                            "color": "#ffffff",
+                            "align": "center"
+                        }
+                    ],
+                    "backgroundColor": "#464F69",
+                    "margin": "none",
+                    "position": "relative",
+                    "borderWidth": "normal",
+                    "cornerRadius": "none",
+                    "paddingAll": "xxl"
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                                "type": "uri",
+                                "label": "買！買！買！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/yYYOiR"
+                            },
+                            "margin": "none",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
+                        },
+                        {
+                            "type": "button",
+                            "action": {
+                                "type": "uri",
+                                "label": "賣！賣！賣！(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/rPe7CQ"
+                            },
+                            "style": "primary",
+                            "margin": "sm"
                         }
                     ]
                 }
