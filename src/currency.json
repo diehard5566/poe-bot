@@ -30,7 +30,8 @@
                             "wrap": true,
                             "weight": "bold",
                             "size": "xl",
-                            "color": "#ffffff"
+                            "color": "#ffffff",
+                            "align": "center"
                         },
                         {
                             "type": "text",
@@ -39,7 +40,8 @@
                             "style": "normal",
                             "margin": "lg",
                             "size": "lg",
-                            "color": "#ffffff"
+                            "color": "#ffffff",
+                            "align": "center"
                         },
                         {
                             "type": "text",
@@ -47,7 +49,8 @@
                             "weight": "bold",
                             "size": "xs",
                             "margin": "lg",
-                            "color": "#ffffff"
+                            "color": "#ffffff",
+                            "align": "center"
                         }
                     ],
                     "backgroundColor": "#464F69",
@@ -67,7 +70,7 @@
                             "style": "primary",
                             "action": {
                                 "type": "uri",
-                                "label": "買(Poe.trade)",
+                                "label": "買！買！買！(Poe.trade)",
                                 "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/Nn8Vt0"
                             },
                             "height": "md",
@@ -114,7 +117,8 @@
                             "wrap": true,
                             "weight": "bold",
                             "size": "xl",
-                            "color": "#ffffff"
+                            "color": "#ffffff",
+                            "align": "center"
                         },
                         {
                             "type": "text",
@@ -123,7 +127,8 @@
                             "style": "normal",
                             "margin": "lg",
                             "size": "lg",
-                            "color": "#ffffff"
+                            "color": "#ffffff",
+                            "align": "center"
                         },
                         {
                             "type": "text",
@@ -131,7 +136,8 @@
                             "weight": "bold",
                             "size": "xs",
                             "margin": "lg",
-                            "color": "#ffffff"
+                            "color": "#ffffff",
+                            "align": "center"
                         }
                     ],
                     "backgroundColor": "#464F69",
