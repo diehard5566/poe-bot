@@ -11,6 +11,7 @@
                     "size": "5xl",
                     "aspectRatio": "20:13",
                     "aspectMode": "fit",
+                    "background": "#ffffff",
                     "url": "https://img.usfine.biz/images/poe-currency/exalted-orb.png",
                     "action": {
                         "type": "uri",
@@ -94,6 +95,7 @@
                     "size": "5xl",
                     "aspectRatio": "20:13",
                     "aspectMode": "fit",
+                    "background": "#ffffff",
                     "url": "https://img.usfine.biz/images/poe-currency/orb-of-alteration.png",
                     "action": {
                         "type": "uri",
