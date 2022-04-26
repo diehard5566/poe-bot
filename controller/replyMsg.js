@@ -106,7 +106,7 @@ const replyMsg = async (reqBody, res) => {
             console.log(dataString)
             reSponse(dataString, token)
         } else if (commandParam[0] === '通貨') {
-            const dataString = replyFlexMsg(reqBody)
+            const dataString = await replyFlexMsg(reqBody)
             console.log(dataString)
             reSponse(dataString, token)
         } else {
