@@ -19,4 +19,5 @@ const getExchange = async () => {
     console.log(currentEx)
 }
 
-getExchange()
+// getExchange()
+module.exports = getExchange
