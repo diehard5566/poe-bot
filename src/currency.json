@@ -1,6 +1,6 @@
 {
     "type": "flex",
-    "altText": "this is a flex message",
+    "altText": "通貨查詢",
     "contents": {
         "type": "carousel",
         "contents": [
@@ -8,10 +8,10 @@
                 "type": "bubble",
                 "hero": {
                     "type": "image",
-                    "size": "full",
+                    "size": "5xl",
                     "aspectRatio": "20:13",
-                    "aspectMode": "cover",
-                    "url": "https://i.imgur.com/YeTZPiE.jpeg",
+                    "aspectMode": "fit",
+                    "url": "https://img.usfine.biz/images/poe-currency/exalted-orb.png",
                     "action": {
                         "type": "uri",
                         "label": "action",
@@ -21,7 +21,7 @@
                 "body": {
                     "type": "box",
                     "layout": "vertical",
-                    "spacing": "sm",
+                    "spacing": "md",
                     "contents": [
                         {
                             "type": "text",
@@ -44,12 +44,17 @@
                             "type": "text",
                             "text": "(此價格為浮動價,詳情請點下方官方連結)",
                             "weight": "bold",
-                            "size": "lg",
+                            "size": "xs",
                             "margin": "lg",
                             "color": "#ffffff"
                         }
                     ],
-                    "backgroundColor": "#464F69"
+                    "backgroundColor": "#464F69",
+                    "margin": "none",
+                    "position": "relative",
+                    "borderWidth": "normal",
+                    "cornerRadius": "none",
+                    "paddingAll": "xxl"
                 },
                 "footer": {
                     "type": "box",
@@ -61,15 +66,20 @@
                             "style": "primary",
                             "action": {
                                 "type": "uri",
-                                "label": "Buy(Poe.trade)",
+                                "label": "買(Poe.trade)",
                                 "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/Nn8Vt0"
-                            }
+                            },
+                            "height": "md",
+                            "margin": "xxl",
+                            "position": "relative",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
                         },
                         {
                             "type": "button",
                             "action": {
                                 "type": "uri",
-                                "label": "Sell(Poe.trade)",
+                                "label": "賣(Poe.trade)",
                                 "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/12R5ck"
                             },
                             "style": "primary"
@@ -84,11 +94,11 @@
                     "size": "full",
                     "aspectRatio": "20:13",
                     "aspectMode": "cover",
-                    "url": "https://i.imgur.com/YeTZPiE.jpeg",
+                    "url": "https://img.usfine.biz/images/poe-currency/orb-of-alteration.png",
                     "action": {
                         "type": "uri",
                         "label": "action",
-                        "uri": "https://poe.ninja/challenge/currency/exalted-orb"
+                        "uri": "https://poe.ninja/challenge/currency/orb-of-alteration"
                     }
                 },
                 "body": {
@@ -98,7 +108,7 @@
                     "contents": [
                         {
                             "type": "text",
-                            "text": "Exalted Orb",
+                            "text": "Orb Of Alt",
                             "wrap": true,
                             "weight": "bold",
                             "size": "xl",
@@ -134,16 +144,16 @@
                             "style": "primary",
                             "action": {
                                 "type": "uri",
-                                "label": "Buy(Poe.trade)",
-                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/Nn8Vt0"
+                                "label": "買(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/AgBPhQ"
                             }
                         },
                         {
                             "type": "button",
                             "action": {
                                 "type": "uri",
-                                "label": "Sell(Poe.trade)",
-                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/12R5ck"
+                                "label": "賣(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/NrE7IQ"
                             },
                             "style": "primary"
                         }
