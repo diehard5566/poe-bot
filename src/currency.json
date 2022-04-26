@@ -116,8 +116,8 @@
                         },
                         {
                             "type": "text",
-                            "text": "Buy:",
-                            "weight": "default",
+                            "text": "default:",
+                            "weight": "bold",
                             "style": "normal",
                             "margin": "lg",
                             "size": "lg",

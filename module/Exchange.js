@@ -18,21 +18,18 @@ const getExchange = async () => {
     const currentEx = Math.round(
         exaltedOrb.receiveCurrencyGraphData[exaltedOrb.receiveCurrencyGraphData.length - 1].value
     )
+    exchangeInfo.set('currentEx', currentEx)
+    const todayExPrice = exchangeInfo.get('currentEx')
 
     //c
     const chaos = 1
 
     //alt
-    exchangeInfo.set('currentEx', currentEx)
-    const todayExPrice = exchangeInfo.get('currentEx')
-
     const res2 = await fetch(ninjaAPI + '6', ninjaOption)
     const alt = await res2.json()
     const altNoExchang =
         Math.round(alt.receiveCurrencyGraphData[alt.receiveCurrencyGraphData.length - 1].value * 100) / 100
-
     const currentAlt = Math.round(+(chaos / altNoExchang).toFixed(3)) * currentEx
-
     exchangeInfo.set('currentAlt', currentAlt)
     const todayAltPrice = exchangeInfo.get('currentAlt')
 
