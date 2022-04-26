@@ -47,7 +47,7 @@ const getExchange = async () => {
     const scouring = await res3.json()
     const scoExchange =
         Math.round(scouring.receiveCurrencyGraphData[scouring.receiveCurrencyGraphData.length - 1].value * 100) / 100
-    const currentSco = Math.round(+(chaos / scoExchange).toFixed(3)) * currentEx
+    const currentSco = +(chaos / scoExchange).toFixed(3) * currentEx
     exchangeInfo.set('currentSco', currentSco)
     const todayScoPrice = exchangeInfo.get('currentSco')
 

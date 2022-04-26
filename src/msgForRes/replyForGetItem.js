@@ -54,18 +54,6 @@ const replyForResult = (reqBody, allResultURL) => {
     })
 }
 
-const replyDefaultMsg = reqBody => {
-    return JSON.stringify({
-        replyToken: reqBody.events[0].replyToken,
-        messages: [
-            {
-                type: 'text',
-                text: '請輸入：帳號+空格+要查詢的帳號！ 例如："帳號 xxxxx"',
-            },
-        ],
-    })
-}
-
 const replyForGetItemErr = reqBody => {
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
@@ -82,4 +70,4 @@ const replyForGetItemErr = reqBody => {
     })
 }
 
-module.exports = { replyForCharItems, charNotHaveItem, replyForResult, replyDefaultMsg, replyForGetItemErr }
+module.exports = { replyForCharItems, charNotHaveItem, replyForResult, replyForGetItemErr }
