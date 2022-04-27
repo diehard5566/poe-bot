@@ -12,7 +12,10 @@ const replyForCharItems = (reqBody, items, jewelInList) => {
             },
             {
                 type: 'text',
-                text: '請輸入:"裝備"(不需要加其他東西,否則無法接收指令),並等候查詢結果！(約10-20秒)',
+                text:
+                    '請等候查詢結果(約10-20秒)!第一次查詢完"該角色"後便可任意輸入裝備編號' +
+                    '\n' +
+                    '如果網址結尾為undefined則代表出錯了！請過陣子再試試！',
             },
         ],
     })
@@ -30,14 +33,22 @@ const charNotHaveItem = (reqBody, items, jewelInList) => {
     })
 }
 
-const replyForResult = (reqBody, allResultURL) => {
+const replyForSingle = (reqBody, single) => {
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
         messages: [
             {
                 type: 'text',
-                text: `感謝您的耐心等候！`,
+                text: single,
             },
+        ],
+    })
+}
+
+const replyForResult = (reqBody, allResultURL) => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
             {
                 type: 'text',
                 text: `${allResultURL}`,
@@ -48,7 +59,7 @@ const replyForResult = (reqBody, allResultURL) => {
             },
             {
                 type: 'text',
-                text: '如果網址結尾為undefined則代表查詢過多次,請過陣子再試試！',
+                text: '如果網址結尾為undefined則代表出錯了！請過陣子再試試！',
             },
         ],
     })
@@ -70,4 +81,27 @@ const replyForGetItemErr = reqBody => {
     })
 }
 
-module.exports = { replyForCharItems, charNotHaveItem, replyForResult, replyForGetItemErr }
+const fetchCompleted = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: '裝備以查詢完畢,若要一次取得全部賣場連結,請輸入："裝備"',
+            },
+            {
+                type: 'text',
+                text: '若只想取得單一裝備賣場連結,請輸入："裝備 編號"(例如：裝備 1)',
+            },
+        ],
+    })
+}
+
+module.exports = {
+    replyForCharItems,
+    charNotHaveItem,
+    replyForResult,
+    replyForGetItemErr,
+    replyForSingle,
+    fetchCompleted,
+}

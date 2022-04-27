@@ -21,7 +21,7 @@ const getURLFromGGG = async searchJsonReady => {
         const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
         const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
-        await delay(2500)
+        await delay(3000)
         const data = await res.json()
 
         return data

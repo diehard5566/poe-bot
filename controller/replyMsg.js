@@ -4,7 +4,7 @@ const allItemURL = require('../module/URLfromGGG')
 const reSponse = require('./resSetting')
 const tranferData = require('../module/searchapi/transferData')
 const getItemForSearch = require('../module/searchapi/searchJson')
-const replyForResult = require('../src/msgForRes/replyForGetItem').replyForResult
+const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgForRes/replyForGetItem')
 const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
 // let Bottleneck = require('bottleneck/es5')
@@ -55,17 +55,19 @@ const replyMsg = async (reqBody, res) => {
 
             let charName = storeInfo.get(charKey)
 
-            // console.log(storeInfo)
+            console.log(storeInfo)
 
             const getItem = getItemFromGGG[0]
-            const dataString = await getItem(reqBody, res, accountName, charName)
+            const dataString = await getItem(reqBody, res, accountName, charName) //拿到該角色身上裝備
             console.log('dataString: ', dataString)
 
             //send request
             reSponse(dataString, token)
 
             //輸入裝備編號,取得各個裝備的賣場搜尋結果
-        } else if (commandParam[0] === '裝備') {
+
+            // } else if (commandParam[0] === '裝備') {
+
             // accountName = storeInfo.get(`lineUserId-${lineUserId}`)
             const getAllItem = getItemFromGGG[1]
             // console.log('我是該角色全部裝備data', getAllItem)
@@ -95,17 +97,43 @@ const replyMsg = async (reqBody, res) => {
                 const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
                     `user-${lineUserId}-trade-URL-${data.id}`
                 )}`
-
+                storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL)
                 allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
             }
 
-            console.log(allResultURL)
-            const dataString = replyForResult(reqBody, allResultURL)
+            if (allResultURL) {
+                const completedMsg = fetchCompleted(reqBody)
+
+                console.log(completedMsg)
+                reSponse(completedMsg, token)
+            }
+
+            //裝備官方賣場URL
+        } else if (commandParam[0] === '裝備') {
+            const getAllItem = getItemFromGGG[1]
+            const transferedData = tranferData(getAllItem)
+
+            let allItemURLFromMap = []
+            for (let i = 1; i < transferedData.length + 1; i++) {
+                //知道總共有幾個裝備
+                allItemURLFromMap.push(`裝備編號No-${i}: ${storeInfo.get(`user-${lineUserId}-裝備編號No-${i}`)}`)
+            }
+
+            //讓user選特定裝備
+            let dataString
+            if (commandParam[1]) {
+                const singleItem = allItemURLFromMap[commandParam[1] - 1] //抓裝備編號
+                dataString = replyForSingle(reqBody, singleItem)
+            } else {
+                dataString = replyForResult(reqBody, allItemURLFromMap)
+            }
 
             console.log(dataString)
             reSponse(dataString, token)
 
-            //flex msg
+            console.log(storeInfo)
+
+            //用flex msg 查通貨價格
         } else if (commandParam[0] === '通貨') {
             const dataString = await replyFlexMsg(reqBody)
             console.log(dataString)
