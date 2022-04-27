@@ -116,7 +116,7 @@ const replyMsg = async (reqBody, res) => {
             let allItemURLFromMap = []
             for (let i = 1; i < transferedData.length + 1; i++) {
                 //知道總共有幾個裝備
-                allItemURLFromMap.push(`裝備編號No-${i}: ${storeInfo.get(`user-${lineUserId}-裝備編號No-${i}`)}`)
+                allItemURLFromMap.push(`裝備編號No-${i}: ${storeInfo.get(`user-${lineUserId}-裝備編號No-${i}`)}` + '\n')
             }
 
             //讓user選特定裝備
@@ -124,12 +124,13 @@ const replyMsg = async (reqBody, res) => {
             if (commandParam[1]) {
                 const singleItem = allItemURLFromMap[commandParam[1] - 1] //抓裝備編號
                 dataString = replyForSingle(reqBody, singleItem)
+                reSponse(dataString, token)
             } else {
                 dataString = replyForResult(reqBody, allItemURLFromMap)
+                reSponse(dataString, token)
             }
 
             console.log(dataString)
-            reSponse(dataString, token)
 
             console.log(storeInfo)
 
