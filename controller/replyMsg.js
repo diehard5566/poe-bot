@@ -7,6 +7,7 @@ const getItemForSearch = require('../module/searchapi/searchJson')
 const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgForRes/replyForGetItem')
 const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
+// const logger = require('../src/logger')
 // let Bottleneck = require('bottleneck/es5')
 
 // const limiter = new Bottleneck({
@@ -59,7 +60,7 @@ const replyMsg = async (reqBody, res) => {
 
             const getItem = getItemFromGGG[0]
             const dataString = await getItem(reqBody, res, accountName, charName) //拿到該角色身上裝備
-            console.log('dataString: ', dataString)
+            logger.info(dataString)
 
             //send request
             reSponse(dataString, token)
@@ -110,6 +111,9 @@ const replyMsg = async (reqBody, res) => {
             }
 
             //裝備官方賣場URL
+
+            //TODO:這邊要跟上面合併,打編號直接show出allItemURLFromMap,再讓user選
+            //TODO:所以rlymsg也要一併改動
         } else if (commandParam[0] === '裝備') {
             const getAllItem = getItemFromGGG[1]
             const transferedData = tranferData(getAllItem)
@@ -133,24 +137,24 @@ const replyMsg = async (reqBody, res) => {
 
             console.log(dataString)
 
-            console.log(storeInfo)
+            // console.log(storeInfo)
 
             //用flex msg 查通貨價格
         } else if (commandParam[0] === '通貨') {
             const dataString = await replyFlexMsg(reqBody)
-            console.log(dataString)
+            logger.info(dataString)
             reSponse(dataString, token)
 
             //command
         } else if (commandParam[0] === '指令') {
             const dataString = replyForCommand(reqBody)
-            console.log(dataString)
+            logger.info(dataString)
             reSponse(dataString, token)
         }
         // default msg
         else {
             const dataString = replyDefaultMsg(reqBody)
-            console.log(dataString)
+            logger.info(dataString)
             reSponse(dataString, token)
         }
     }

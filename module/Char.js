@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const { replyForCharInfo, replyForCharNotFound } = require('../src/msgForRes/replyForGetChar')
-// const replyForCharNotFound =
+const logger = require('../src/logger')
 
 const storeCharInfo = new Map()
 
@@ -38,6 +38,7 @@ const getCharacter = async (reqBody, res, accountName) => {
         // Message data, must be stringified
         // replyForCharInfo(reqBody, accountName, leagueData, nameInOrderList)
         dataString = replyForCharNotFound(reqBody, accountName)
+        logger.error(error)
     }
 
     return [dataString, charNameInlist, storeCharInfo]

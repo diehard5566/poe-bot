@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const { replyForCharItems, replyForGetItemErr, charNotHaveItem } = require('../src/msgForRes/replyForGetItem')
-
+const logger = require('../src/logger')
 const storeItem = new Map()
 
 const getItem = async (reqBody, res, accountName, charName) => {
@@ -67,7 +67,7 @@ const getItem = async (reqBody, res, accountName, charName) => {
         // Message data, must be stringified
         dataString = replyForGetItemErr(reqBody)
 
-        console.log(error)
+        logger.error(error)
     }
 
     return dataString

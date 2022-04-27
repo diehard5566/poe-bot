@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const logger = require('../src/logger')
 // var Bottleneck = require("bottleneck/es5");
 
 // const limiter =  new Bottleneck({
@@ -26,7 +27,7 @@ const getURLFromGGG = async searchJsonReady => {
 
         return data
     } catch (error) {
-        console.log(error)
+        logger.error(error)
     }
 }
 
