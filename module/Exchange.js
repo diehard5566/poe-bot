@@ -47,7 +47,7 @@ const getExchange = async () => {
     const scouring = await res3.json()
     const scoExchange =
         Math.round(scouring.receiveCurrencyGraphData[scouring.receiveCurrencyGraphData.length - 1].value * 100) / 100
-    const currentSco = +(chaos / scoExchange).toFixed(3) * currentEx
+    const currentSco = Math.round(+(chaos / scoExchange).toFixed(3) * currentEx)
     exchangeInfo.set('currentSco', currentSco)
     const todayScoPrice = exchangeInfo.get('currentSco')
 
@@ -56,7 +56,7 @@ const getExchange = async () => {
     const fusing = await res4.json()
     const fusExchange =
         Math.round(fusing.receiveCurrencyGraphData[fusing.receiveCurrencyGraphData.length - 1].value * 100) / 100
-    const currentFus = +(chaos / fusExchange).toFixed(1) * currentEx
+    const currentFus = Math.round(+(chaos / fusExchange).toFixed(1) * currentEx)
     exchangeInfo.set('currentFus', currentFus)
     const todayFusPrice = exchangeInfo.get('currentFus')
 
@@ -83,7 +83,7 @@ const getExchange = async () => {
     const alc = await res7.json()
     const alcExchange =
         Math.round(alc.receiveCurrencyGraphData[alc.receiveCurrencyGraphData.length - 1].value * 100) / 100
-    const currentAlc = +(chaos / alcExchange).toFixed(3)
+    const currentAlc = Math.round(+(chaos / alcExchange).toFixed(3))
     exchangeInfo.set('currentAlc', currentAlc)
     const todayAlcPrice = exchangeInfo.get('currentAlc')
 
