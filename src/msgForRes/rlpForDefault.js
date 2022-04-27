@@ -30,7 +30,7 @@ const replyForCommand = reqBody => {
             },
             {
                 type: 'text',
-                text: '指令：' + '\n' + '2.通貨(查詢通貨價格 from ninja) ' + '\n' + '直接輸入："通貨"',
+                text: '2.通貨(查詢通貨價格 from ninja) ' + '\n' + '直接輸入："通貨"',
             },
         ],
     })
