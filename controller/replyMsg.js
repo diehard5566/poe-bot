@@ -101,6 +101,7 @@ const replyMsg = async (reqBody, res) => {
                 allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
             }
 
+            //這段目前沒用 應該是因為沒有收到commandParam
             if (allResultURL) {
                 const completedMsg = fetchCompleted(reqBody)
 
