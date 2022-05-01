@@ -19,13 +19,14 @@ app.get('/', (req, res) => {
     res.sendStatus(200)
 })
 
-const token = process.env.LINE_ACCESS_TOKEN
+const TOKEN = process.env.LINE_ACCESS_TOKEN //TODO 這邊是測試晚點要刪
 app.post('/webhook', async (req, res) => {
     res.send('HTTP POST request sent to the webhook URL!')
     // If the user sends a message to your bot, send a reply message
     // const replyMsg = reply[0]
     // replyMsg(req.body, res)
     if (req.body.events[0].type === 'message') {
+        //TODO 這邊是測試晚點要刪
         // Message data, must be stringified
         const dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
