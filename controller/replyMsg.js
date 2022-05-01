@@ -17,7 +17,7 @@ const limiter = new Bottleneck({
 })
 
 const token = env.LINE_ACCESS_TOKEN
-// console.log(env.LINE_ACCESS_TOKEN)
+console.log('我是最新的git應該要出現！！！！！！！')
 
 //用Map去存帳號
 const storeInfo = new Map()
