@@ -7,13 +7,13 @@ const getItemForSearch = require('../module/searchapi/searchJson')
 const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgForRes/replyForGetItem')
 const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
-// const logger = require('../src/logger')
-// let Bottleneck = require('bottleneck/es5')
+const logger = require('../src/logger')
+let Bottleneck = require('bottleneck/es5')
 
-// const limiter = new Bottleneck({
-//     maxConcurrent: 1,
-//     minTime: 2000,
-// })
+const limiter = new Bottleneck({
+    maxConcurrent: 1,
+    minTime: 2000,
+})
 
 const token = process.env.LINE_ACCESS_TOKEN
 
