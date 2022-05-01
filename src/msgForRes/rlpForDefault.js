@@ -8,7 +8,7 @@ const replyDefaultMsg = reqBody => {
             },
             {
                 type: 'text',
-                text: '請輸入："final test"',
+                text: '請輸入："指令"',
             },
         ],
     })
