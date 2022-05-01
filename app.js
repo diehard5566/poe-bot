@@ -19,60 +19,60 @@ app.get('/', (req, res) => {
     res.sendStatus(200)
 })
 
-const TOKEN = process.env.LINE_ACCESS_TOKEN //TODO 這邊是測試晚點要刪
+// const TOKEN = process.env.LINE_ACCESS_TOKEN //TODO 這邊是測試晚點要刪
 app.post('/webhook', async (req, res) => {
     res.send('HTTP POST request sent to the webhook URL!')
     // If the user sends a message to your bot, send a reply message
-    // const replyMsg = reply[0]
-    // replyMsg(req.body, res)
-    if (req.body.events[0].type === 'message') {
-        //TODO 這邊是測試晚點要刪
-        // Message data, must be stringified
-        const dataString = JSON.stringify({
-            replyToken: req.body.events[0].replyToken,
-            messages: [
-                {
-                    type: 'text',
-                    text: 'Hello, user',
-                },
-                {
-                    type: 'text',
-                    text: 'May I help you?',
-                },
-            ],
-        })
+    const replyMsg = reply[0]
+    replyMsg(req.body, res)
+    // if (req.body.events[0].type === 'message') {
+    //     //TODO 這邊是測試晚點要刪
+    //     // Message data, must be stringified
+    //     const dataString = JSON.stringify({
+    //         replyToken: req.body.events[0].replyToken,
+    //         messages: [
+    //             {
+    //                 type: 'text',
+    //                 text: 'Hello, user',
+    //             },
+    //             {
+    //                 type: 'text',
+    //                 text: 'May I help you?',
+    //             },
+    //         ],
+    //     })
 
-        // Request header
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + TOKEN,
-        }
+    //     // Request header
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         Authorization: 'Bearer ' + TOKEN,
+    //     }
 
-        // Options to pass into the request
-        const webhookOptions = {
-            hostname: 'api.line.me',
-            path: '/v2/bot/message/reply',
-            method: 'POST',
-            headers: headers,
-            body: dataString,
-        }
+    //     // Options to pass into the request
+    //     const webhookOptions = {
+    //         hostname: 'api.line.me',
+    //         path: '/v2/bot/message/reply',
+    //         method: 'POST',
+    //         headers: headers,
+    //         body: dataString,
+    //     }
 
-        // Define request
-        const request = https.request(webhookOptions, res => {
-            res.on('data', d => {
-                process.stdout.write(d)
-            })
-        })
+    //     // Define request
+    //     const request = https.request(webhookOptions, res => {
+    //         res.on('data', d => {
+    //             process.stdout.write(d)
+    //         })
+    //     })
 
-        // Handle error
-        request.on('error', err => {
-            console.error(err)
-        })
+    //     // Handle error
+    //     request.on('error', err => {
+    //         console.error(err)
+    //     })
 
-        // Send data
-        request.write(dataString)
-        request.end()
-    }
+    //     // Send data
+    //     request.write(dataString)
+    //     request.end()
+    // }
 })
 
 app.listen(PORT, () => {
