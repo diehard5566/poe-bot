@@ -16,7 +16,7 @@ const limiter = new Bottleneck({
     minTime: 2000,
 })
 
-const token = env.LINE_ACCESS_TOKEN
+const token = process.env.LINE_ACCESS_TOKEN
 
 //用Map去存帳號
 const storeInfo = new Map()
