@@ -9,6 +9,7 @@ const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
 const logger = require('../src/logger')
 let Bottleneck = require('bottleneck/es5')
+require('dotenv').config()
 
 const limiter = new Bottleneck({
     maxConcurrent: 1,
