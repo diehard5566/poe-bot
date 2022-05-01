@@ -9,13 +9,15 @@ const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
 const logger = require('../src/logger')
 let Bottleneck = require('bottleneck/es5')
+const env = require('../env.json')
 
 const limiter = new Bottleneck({
     maxConcurrent: 1,
     minTime: 2000,
 })
 
-const token = process.env.LINE_ACCESS_TOKEN
+const token = env.LINE_ACCESS_TOKEN
+// console.log(env.LINE_ACCESS_TOKEN)
 
 //用Map去存帳號
 const storeInfo = new Map()
