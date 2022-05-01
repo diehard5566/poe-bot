@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
     res.sendStatus(200)
 })
 
+const token = process.env.LINE_ACCESS_TOKEN
 app.post('/webhook', async (req, res) => {
     res.send('HTTP POST request sent to the webhook URL!')
     // If the user sends a message to your bot, send a reply message
