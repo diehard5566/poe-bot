@@ -24,11 +24,11 @@ const replyMsg = async (reqBody, res) => {
     const lineUserId = reqBody.events[0].source.userId
     let accountName
     let dataFromgetChar
+    await checkAndInsert(commandParam, lineUserId)
 
     if (reqBodyMsg === 'message') {
         //把lienID跟帳號綁定
         //輸入帳號，取得角色列表
-        checkAndInsert(commandParam, lineUserId)
 
         if (commandParam[0] === '帳號') {
             db.execute(`SELECT * FROM main LIMIT 100`)

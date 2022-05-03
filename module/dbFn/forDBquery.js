@@ -1,14 +1,15 @@
 const db = require('../../db/connect')
 const logger = require('../../src/logger')
 
-const checkAndInsert = (commandParam, lineUserId) => {
-    db.execute(
-        `INSERT INTO main (account, line_id)
+const checkAndInsert = async (commandParam, lineUserId) => {
+    await db
+        .execute(
+            `INSERT INTO main (account, line_id)
         SELECT * FROM (SELECT '${commandParam[1]}', '${lineUserId}') AS tmp
         WHERE NOT EXISTS (
             SELECT account,line_id FROM main WHERE account = '${commandParam[1]}' and line_id = '${lineUserId}'
         ) LIMIT 1;`
-    )
+        )
         .then(data => {
             logger.info('Process done!')
         })
