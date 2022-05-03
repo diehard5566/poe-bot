@@ -17,11 +17,11 @@ const checkAndInsert = (commandParam, lineUserId) => {
         })
 }
 
-const getAccountFromDB = async lineUserId => {
+const getAccountFromDB = async (commandParam, lineUserId) => {
     return await db
         .execute(
             `SELECT account FROM main 
-                    WHERE line_id = '${lineUserId}'`
+                    WHERE account='${commandParam[1]}' AND line_id = '${lineUserId}'`
         )
         .then(data => {
             logger.info(data[0][0].account)

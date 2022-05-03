@@ -28,9 +28,9 @@ const replyMsg = async (reqBody, res) => {
     if (reqBodyMsg === 'message') {
         //把lienID跟帳號綁定
         //輸入帳號，取得角色列表
-        if (commandParam[0] === '帳號') {
-            checkAndInsert(commandParam, lineUserId)
+        checkAndInsert(commandParam, lineUserId)
 
+        if (commandParam[0] === '帳號') {
             db.execute(`SELECT * FROM main LIMIT 100`)
                 .then(data => {
                     console.log('im from db', data[0])
@@ -39,7 +39,7 @@ const replyMsg = async (reqBody, res) => {
                     console.log(err)
                 })
 
-            accountName = await getAccountFromDB(lineUserId)
+            accountName = await getAccountFromDB(commandParam, lineUserId)
 
             dataFromgetChar = await getChar(reqBody, res, accountName)
 
