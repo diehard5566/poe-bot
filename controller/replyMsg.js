@@ -8,13 +8,9 @@ const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgFo
 const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
 const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
 const logger = require('../src/logger')
-let Bottleneck = require('bottleneck/es5')
+const db = require('../db/connect')
 require('dotenv').config()
-
-const limiter = new Bottleneck({
-    maxConcurrent: 1,
-    minTime: 2000,
-})
+const { checkAndInsert, getAccountFromDB } = require('../module/dbFn/forDBquery')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -33,10 +29,17 @@ const replyMsg = async (reqBody, res) => {
         //把lienID跟帳號綁定
         //輸入帳號，取得角色列表
         if (commandParam[0] === '帳號') {
-            storeInfo.set(`lineUserId-${lineUserId}`, commandParam[1])
+            checkAndInsert(commandParam, lineUserId)
 
-            accountName = storeInfo.get(`lineUserId-${lineUserId}`)
-            console.log('storeInfo:', storeInfo)
+            db.execute(`SELECT * FROM main LIMIT 100`)
+                .then(data => {
+                    console.log('im from db', data[0])
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
+            accountName = await getAccountFromDB(lineUserId)
 
             dataFromgetChar = await getChar(reqBody, res, accountName)
 
@@ -47,15 +50,34 @@ const replyMsg = async (reqBody, res) => {
             reSponse(dataString, token)
             //輸入角色編號,取得身上裝備
         } else if (commandParam[0] === '編號') {
-            accountName = storeInfo.get(`lineUserId-${lineUserId}`)
+            accountName = await getAccountFromDB(lineUserId) //TODO 換成從DB拿出來
 
             let charKey = `user-${lineUserId}-charId` + commandParam[1]
+            console.log('storeInfo MAP: ', storeInfo)
 
             dataFromgetChar = await getChar(reqBody, res, accountName)
+            console.log('dataFromgetChar:', dataFromgetChar)
 
-            storeInfo.set(charKey, dataFromgetChar[1][commandParam[1] - 1])
+            for (let i = 0; i < dataFromgetChar[1].length; i++) {
+                db.execute(
+                    `INSERT INTO character_info (character_name, line_id)
+                    SELECT * FROM (SELECT '${dataFromgetChar[1][i]}', '${lineUserId}') AS tmp
+                    WHERE NOT EXISTS (
+                        SELECT character_name,line_id FROM character_info 
+                        WHERE character_name = '${dataFromgetChar[1][i]}' and line_id = '${lineUserId}'
+                    ) LIMIT 1;`
+                )
+                    .then(data => {
+                        logger.info(data[0]) //'Process done!'
+                    })
+                    .catch(err => {
+                        logger.error(err)
+                    })
+            }
 
-            let charName = storeInfo.get(charKey)
+            storeInfo.set(charKey, dataFromgetChar[1][commandParam[1] - 1]) //TODO 換成DB
+
+            let charName = storeInfo.get(charKey) //TODO 換成DB
 
             console.log(storeInfo)
 
@@ -79,7 +101,7 @@ const replyMsg = async (reqBody, res) => {
 
             for (let i = 0; i < transferedData.length; i++) {
                 const eachItemKey = transferedData[i]
-                // console.log(eachItem)
+
                 storeInfo.set(`user-${lineUserId}-item-No${i + 1}`, eachItemKey)
                 // console.log('我是存在Map裡面的每個item：', storeInfo)
             }
@@ -92,24 +114,26 @@ const replyMsg = async (reqBody, res) => {
 
                 //把詞綴丟進searchJson function去轉成JSON 最後會回給user的是URL
                 const searchJsonReady = await getItemForSearch(allItem) //singleItem
-                console.log(i + '.我是要被丟去給ggg的JSON: ', searchJsonReady)
+                // console.log(i + '.我是要被丟去給ggg的JSON: ', searchJsonReady)
 
                 const data = await allItemURL(searchJsonReady)
                 storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
                 const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
                     `user-${lineUserId}-trade-URL-${data.id}`
                 )}`
-                storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL)
+                storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL) //TODO 換成DB
+
                 allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
             }
 
+            console.log('我應該是ARC: ', charName)
             //這段目前沒用 應該是因為沒有收到commandParam
-            if (allResultURL) {
-                const completedMsg = fetchCompleted(reqBody)
+            // if (allResultURL) {
+            //     const completedMsg = fetchCompleted(reqBody)
 
-                console.log(completedMsg)
-                reSponse(completedMsg, token)
-            }
+            //     console.log(completedMsg)
+            //     reSponse(completedMsg, token)
+            // }
 
             //裝備官方賣場URL
 
@@ -123,7 +147,8 @@ const replyMsg = async (reqBody, res) => {
             for (let i = 1; i < transferedData.length + 1; i++) {
                 //知道總共有幾個裝備
                 allItemURLFromMap.push(`裝備編號No-${i}: ${storeInfo.get(`user-${lineUserId}-裝備編號No-${i}`)}` + '\n')
-            }
+            } //TODO take from db
+            console.log('我應該要存進DB: ', allItemURLFromMap) //TODO take from db and store in array
 
             //讓user選特定裝備
             let dataString
@@ -136,7 +161,7 @@ const replyMsg = async (reqBody, res) => {
                 reSponse(dataString, token)
             }
 
-            console.log(dataString)
+            // console.log(dataString)
 
             // console.log(storeInfo)
 
