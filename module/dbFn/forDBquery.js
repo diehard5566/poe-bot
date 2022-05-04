@@ -57,7 +57,7 @@ const addUrlToDB = async (lineUserId, i, trade_URL, charName) => {
     await db
         .execute(
             `INSERT INTO item_info (trade_url, item_num, line_id, character_name) VALUES('${trade_URL}',${i} ,'${lineUserId}','${charName}')
-            ON DUPLICATE KEY UPDATE  line_id='${lineUserId}' ` //trade_url='${trade_URL}',,character_name = '${charName}'
+            ON DUPLICATE KEY UPDATE trade_url='${trade_URL}', line_id='${lineUserId}' ,character_name = '${charName}'` //
         )
         .then(data => {
             logger.info(data[0])
@@ -67,11 +67,13 @@ const addUrlToDB = async (lineUserId, i, trade_URL, charName) => {
         })
 }
 
-const getUrlFromDB = async (i, lineUserId) => {
+const getUrlFromDB = async (i, lineUserId, character_name) => {
     return await db
         .execute(
             `SELECT trade_url FROM item_info
-            WHERE item_num = '${i}' AND line_id = '${lineUserId}'`
+            WHERE item_num = '${i}' 
+            AND line_id = '${lineUserId}'
+            AND character_name = '${character_name}' `
         )
         .then(data => {
             return data[0][0].trade_url
