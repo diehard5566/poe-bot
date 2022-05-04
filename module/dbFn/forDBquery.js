@@ -50,8 +50,38 @@ const getCharNameFromDB = async (commandParam, lineUserId) => {
         })
 }
 
+const addUrlToDB = async (lineUserId, i, trade_URL) => {
+    await db
+        .execute(
+            `INSERT INTO item_info (trade_url, item_num, line_id) VALUES('${trade_URL}',${i} ,'${lineUserId}')
+    ON DUPLICATE KEY UPDATE trade_url='${trade_URL}', line_id='${lineUserId}'`
+        )
+        .then(data => {
+            logger.info(data[0])
+        })
+        .catch(err => {
+            logger.error(err)
+        })
+}
+
+const getUrlFromDB = async (i, lineUserId) => {
+    return await db
+        .execute(
+            `SELECT trade_url FROM item_info
+            WHERE item_num = '${i}' AND line_id = '${lineUserId}'`
+        )
+        .then(data => {
+            return data[0][0].trade_url
+        })
+        .catch(err => {
+            logger.info(err)
+        })
+}
+
 module.exports = {
     checkAndInsert,
     getAccountFromDB,
     getCharNameFromDB,
+    addUrlToDB,
+    getUrlFromDB,
 }

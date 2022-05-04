@@ -10,7 +10,13 @@ const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDef
 const logger = require('../src/logger')
 const db = require('../db/connect')
 require('dotenv').config()
-const { checkAndInsert, getAccountFromDB, getCharNameFromDB } = require('../module/dbFn/forDBquery')
+const {
+    checkAndInsert,
+    getAccountFromDB,
+    getCharNameFromDB,
+    addUrlToDB,
+    getUrlFromDB,
+} = require('../module/dbFn/forDBquery')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -133,6 +139,8 @@ const replyMsg = async (reqBody, res) => {
                 )}`
                 storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL) //TODO 換成DB
 
+                addUrlToDB(lineUserId, i, trade_URL)
+
                 allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
             }
 
@@ -150,17 +158,32 @@ const replyMsg = async (reqBody, res) => {
             //TODO:這邊要跟上面合併,打編號直接show出allItemURLFromMap,再讓user選
             //TODO:所以rlymsg也要一併改動
         } else if (commandParam[0] === '裝備') {
-            const getAllItem = getItemFromGGG[1]
-            const transferedData = tranferData(getAllItem)
+            // const getAllItem = getItemFromGGG[1]
+            // const transferedData = tranferData(getAllItem)
 
-            let allItemURLFromMap = []
-            for (let i = 1; i < transferedData.length + 1; i++) {
+            const tempitemlength = await db
+                .execute(
+                    `SELECT MAX(item_num) FROM item_info
+                WHERE line_id = '${lineUserId}' `
+                )
+                .then(data => {
+                    return Object.values(data[0][0])[0]
+                })
+                .catch(err => console.log(err))
+            console.log('-----------', tempitemlength)
+
+            allItemURLFromMap = []
+
+            for (let i = 1; i < tempitemlength + 1; i++) {
                 //知道總共有幾個裝備
-                allItemURLFromMap.push(`裝備編號No-${i}: ${storeInfo.get(`user-${lineUserId}-裝備編號No-${i}`)}` + '\n')
+                const tempUrl = await getUrlFromDB(i, lineUserId)
+
+                allItemURLFromMap.push(`裝備編號No-${i}: ${tempUrl}` + '\n')
             } //TODO take from db
             console.log('我應該要存進DB: ', allItemURLFromMap) //TODO take from db and store in array
 
             //讓user選特定裝備
+
             let dataString
             if (commandParam[1]) {
                 const singleItem = allItemURLFromMap[commandParam[1] - 1] //抓裝備編號
@@ -171,7 +194,7 @@ const replyMsg = async (reqBody, res) => {
                 reSponse(dataString, token)
             }
 
-            // console.log(dataString)
+            console.log(dataString)
 
             // console.log(storeInfo)
 
