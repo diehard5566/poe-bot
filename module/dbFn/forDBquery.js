@@ -36,13 +36,16 @@ const getAccountFromDB = async lineUserId => {
         })
 }
 
-const getCharNameFromDB = async (commandParam, lineUserId) => {
+const getCharNameFromDB = async (commandParam, lineUserId, account) => {
     return await db
         .execute(
             `SELECT character_name FROM character_info
-                 WHERE character_num = '${commandParam[1]}' AND line_id = '${lineUserId}'`
+                WHERE character_num = '${commandParam[1]}' 
+                AND line_id = '${lineUserId}'
+                AND account = '${account}'`
         )
         .then(data => {
+            logger.info(data[0][0])
             return data[0][0].character_name
         })
         .catch(err => {
@@ -50,11 +53,11 @@ const getCharNameFromDB = async (commandParam, lineUserId) => {
         })
 }
 
-const addUrlToDB = async (lineUserId, i, trade_URL) => {
+const addUrlToDB = async (lineUserId, i, trade_URL, charName) => {
     await db
         .execute(
-            `INSERT INTO item_info (trade_url, item_num, line_id) VALUES('${trade_URL}',${i} ,'${lineUserId}')
-    ON DUPLICATE KEY UPDATE trade_url='${trade_URL}', line_id='${lineUserId}'`
+            `INSERT INTO item_info (trade_url, item_num, line_id, character_name) VALUES('${trade_URL}',${i} ,'${lineUserId}','${charName}')
+            ON DUPLICATE KEY UPDATE  line_id='${lineUserId}' ` //trade_url='${trade_URL}',,character_name = '${charName}'
         )
         .then(data => {
             logger.info(data[0])

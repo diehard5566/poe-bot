@@ -57,13 +57,14 @@ const replyMsg = async (reqBody, res) => {
 
             for (let i = 0; i < dataFromgetChar[1].length; i++) {
                 db.execute(
-                    `INSERT INTO character_info (character_name, line_id,character_num)
-                    VALUES('${dataFromgetChar[1][i]}','${lineUserId}','${i + 1}')
+                    //TODO wrap to fn
+                    `INSERT INTO character_info (character_name, line_id, character_num, account )
+                    VALUES('${dataFromgetChar[1][i]}','${lineUserId}','${i + 1}','${accountName}')
                     ON DUPLICATE KEY UPDATE    
-                    character_name='${dataFromgetChar[1][i]}', line_id='${lineUserId}',character_num='${i + 1}'`
+                     line_id='${lineUserId}',character_num='${i + 1}',account = '${accountName}'`
                 )
                     .then(data => {
-                        logger.info(data[0]) //'Process done!'
+                        logger.info(data[0]) //'Process done!'character_name='${dataFromgetChar[1][i]}',
                     })
                     .catch(err => {
                         logger.error(err)
@@ -93,7 +94,7 @@ const replyMsg = async (reqBody, res) => {
 
             // storeInfo.set(charKey, dataFromgetChar[1][commandParam[1] - 1]) //TODO 換成DB
 
-            let charName = await getCharNameFromDB(commandParam, lineUserId) //storeInfo.get(charKey) //TODO 換成DB
+            let charName = await getCharNameFromDB(commandParam, lineUserId, accountName) //storeInfo.get(charKey) //TODO 換成DB
 
             // console.log(storeInfo)
 
@@ -139,12 +140,11 @@ const replyMsg = async (reqBody, res) => {
                 )}`
                 storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL) //TODO 換成DB
 
-                addUrlToDB(lineUserId, i, trade_URL)
+                addUrlToDB(lineUserId, i, trade_URL, charName)
 
                 allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
             }
 
-            console.log('我應該是ARC: ', charName)
             //這段目前沒用 應該是因為沒有收到commandParam
             // if (allResultURL) {
             //     const completedMsg = fetchCompleted(reqBody)
@@ -179,8 +179,7 @@ const replyMsg = async (reqBody, res) => {
                 const tempUrl = await getUrlFromDB(i, lineUserId)
 
                 allItemURLFromMap.push(`裝備編號No-${i}: ${tempUrl}` + '\n')
-            } //TODO take from db
-            console.log('我應該要存進DB: ', allItemURLFromMap) //TODO take from db and store in array
+            }
 
             //讓user選特定裝備
 
