@@ -10,7 +10,7 @@ const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDef
 const logger = require('../src/logger')
 const db = require('../db/connect')
 require('dotenv').config()
-const { checkAndInsert, getAccountFromDB } = require('../module/dbFn/forDBquery')
+const { checkAndInsert, getAccountFromDB, getCharNameFromDB } = require('../module/dbFn/forDBquery')
 
 const token = process.env.LINE_ACCESS_TOKEN
 
@@ -24,13 +24,14 @@ const replyMsg = async (reqBody, res) => {
     const lineUserId = reqBody.events[0].source.userId
     let accountName
     let dataFromgetChar
-    await checkAndInsert(commandParam, lineUserId)
 
     if (reqBodyMsg === 'message') {
         //把lienID跟帳號綁定
         //輸入帳號，取得角色列表
 
         if (commandParam[0] === '帳號') {
+            await checkAndInsert(commandParam, lineUserId)
+
             db.execute(`SELECT * FROM main LIMIT 100`)
                 .then(data => {
                     console.log('im from db', data[0])
@@ -39,33 +40,21 @@ const replyMsg = async (reqBody, res) => {
                     console.log(err)
                 })
 
-            accountName = await getAccountFromDB(commandParam, lineUserId)
+            accountName = await getAccountFromDB(lineUserId)
 
             dataFromgetChar = await getChar(reqBody, res, accountName)
 
             const dataString = dataFromgetChar[0] //await getChar(reqBody, res, accountName)
             console.log('dataString: ', dataString)
-
             //send request
             reSponse(dataString, token)
-            //輸入角色編號,取得身上裝備
-        } else if (commandParam[0] === '編號') {
-            accountName = await getAccountFromDB(lineUserId) //TODO 換成從DB拿出來
-
-            let charKey = `user-${lineUserId}-charId` + commandParam[1]
-            console.log('storeInfo MAP: ', storeInfo)
-
-            dataFromgetChar = await getChar(reqBody, res, accountName)
-            console.log('dataFromgetChar:', dataFromgetChar)
 
             for (let i = 0; i < dataFromgetChar[1].length; i++) {
                 db.execute(
-                    `INSERT INTO character_info (character_name, line_id)
-                    SELECT * FROM (SELECT '${dataFromgetChar[1][i]}', '${lineUserId}') AS tmp
-                    WHERE NOT EXISTS (
-                        SELECT character_name,line_id FROM character_info 
-                        WHERE character_name = '${dataFromgetChar[1][i]}' and line_id = '${lineUserId}'
-                    ) LIMIT 1;`
+                    `INSERT INTO character_info (character_name, line_id,character_num)
+                    VALUES('${dataFromgetChar[1][i]}','${lineUserId}','${i + 1}')
+                    ON DUPLICATE KEY UPDATE    
+                    character_name='${dataFromgetChar[1][i]}', line_id='${lineUserId}',character_num='${i + 1}'`
                 )
                     .then(data => {
                         logger.info(data[0]) //'Process done!'
@@ -75,11 +64,32 @@ const replyMsg = async (reqBody, res) => {
                     })
             }
 
-            storeInfo.set(charKey, dataFromgetChar[1][commandParam[1] - 1]) //TODO 換成DB
+            //輸入角色編號,取得身上裝備
+        } else if (commandParam[0] === '編號') {
+            accountName = await getAccountFromDB(lineUserId) //TODO 換成從DB拿出來
 
-            let charName = storeInfo.get(charKey) //TODO 換成DB
+            // db.execute(
+            //     `SELECT character_name FROM character_info
+            //      WHERE character_num = '${commandParam[1]}' AND line_id = '${lineUserId}'`
+            // )
+            //     .then(data => {
+            //         logger.info(data[0])
+            //     })
+            //     .catch(err => {
+            //         logger.info(err)
+            //     })
 
-            console.log(storeInfo)
+            // let charKey = `user-${lineUserId}-charId` + commandParam[1]
+            // console.log('storeInfo MAP: ', storeInfo)
+
+            // dataFromgetChar = await getChar(reqBody, res, accountName)
+            // console.log('dataFromgetChar:', dataFromgetChar)
+
+            // storeInfo.set(charKey, dataFromgetChar[1][commandParam[1] - 1]) //TODO 換成DB
+
+            let charName = await getCharNameFromDB(commandParam, lineUserId) //storeInfo.get(charKey) //TODO 換成DB
+
+            // console.log(storeInfo)
 
             const getItem = getItemFromGGG[0]
             const dataString = await getItem(reqBody, res, accountName, charName) //拿到該角色身上裝備
