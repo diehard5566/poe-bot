@@ -18,6 +18,13 @@ const replyForCharInfo = (reqBody, accountName, leagueData, nameInOrderList) => 
                 type: 'text',
                 text: '接著請輸入：編號+空格+角色編號 例如："編號 2"',
             },
+            {
+                type: 'text',
+                text:
+                    '輸入之後,查詢約需要20-30秒!稍後會直接回傳給您！' +
+                    '\n' +
+                    '如果網址結尾為undefined則代表出錯了！請過陣子再試試！',
+            },
         ],
     })
 }
