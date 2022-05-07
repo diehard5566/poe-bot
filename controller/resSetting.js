@@ -1,6 +1,6 @@
 const https = require('https')
 
-const reSponse = async (dataString, TOKEN) => {
+const response = async (dataString, TOKEN) => {
     // Request header
     const headers = {
         'Content-Type': 'application/json',
@@ -33,4 +33,4 @@ const reSponse = async (dataString, TOKEN) => {
     request.end()
 }
 
-module.exports = reSponse
+module.exports = response

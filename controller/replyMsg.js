@@ -1,7 +1,7 @@
 require('dotenv').config()
 const getChar = require('../module/characters')
 const allItemURL = require('../module/urlFromGGG')
-const reSponse = require('./resSetting')
+const response = require('./resSetting')
 const transferData = require('../module/searchAPI/transferData')
 const getItemForSearch = require('../module/searchAPI/searchJson')
 const getItemFromGGG = require('../module/items')
@@ -53,7 +53,7 @@ const replyMsg = async (reqBody, res) => {
             const dataString = dataFromgetChar[0] //await getChar(reqBody, res, accountName)
             console.log('dataString: ', dataString)
             //send request
-            reSponse(dataString, token)
+            response(dataString, token)
 
             for (let i = 0; i < dataFromgetChar[1].length; i++) {
                 db.execute(
@@ -116,7 +116,7 @@ const replyMsg = async (reqBody, res) => {
             // console.log('我是裝備細節：', transferredData)
 
             if (transferredData.length === 0) {
-                reSponse(dataString, token) //沒穿裝的角色
+                response(dataString, token) //沒穿裝的角色
                 logger.info(dataString)
             } else {
                 for (let i = 0; i < transferredData.length; i++) {
@@ -153,7 +153,7 @@ const replyMsg = async (reqBody, res) => {
                 //     const completedMsg = fetchCompleted(reqBody)
 
                 //     console.log(completedMsg)
-                //     reSponse(completedMsg, token)
+                //     response(completedMsg, token)
                 // }
 
                 //裝備官方賣場URL
@@ -189,10 +189,10 @@ const replyMsg = async (reqBody, res) => {
                 // if (commandParam[1]) {
                 //     const singleItem = allItemURLFromMap[commandParam[1] - 1] //抓裝備編號
                 //     const dataString = replyForSingle(reqBody, singleItem)
-                //     reSponse(dataString, token)
+                //     response(dataString, token)
                 // } else {
                 const finalResString = replyForResult(reqBody, allItemURLFromMap)
-                reSponse(finalResString, token)
+                response(finalResString, token)
                 // }
 
                 logger.info(finalResString)
@@ -202,19 +202,19 @@ const replyMsg = async (reqBody, res) => {
         } else if (commandParam[0] === '通貨') {
             const dataString = await replyFlexMsg(reqBody)
             logger.info(dataString)
-            reSponse(dataString, token)
+            response(dataString, token)
 
             //command
         } else if (commandParam[0] === '指令') {
             const dataString = replyForCommand(reqBody)
             logger.info(dataString)
-            reSponse(dataString, token)
+            response(dataString, token)
         }
         // default msg
         else {
             const dataString = replyDefaultMsg(reqBody)
             logger.info(dataString)
-            reSponse(dataString, token)
+            response(dataString, token)
         }
     }
 }
