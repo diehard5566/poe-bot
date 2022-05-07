@@ -1,6 +1,6 @@
 {
     "type": "flex",
-    "altText": "通貨查詢",
+    "altText": "主動訊息",
     "contents": {
         "type": "carousel",
         "contents": [
