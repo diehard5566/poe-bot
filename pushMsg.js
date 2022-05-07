@@ -22,12 +22,12 @@ function delay(number) {
 
 const finalFn = async () => {
     const origin = await getOgPost() //get post
-    await delay(10000) // 5400000 = wait 1 and half hour
+    await delay(25000) // 5400000 = wait 1 and half hour
     const recent = await getOgPost() //get recent post
     // logger.info(origin.post_text)
     // logger.info(recent.post_text)
     // logger.info(origin.post_text === recent.post_text)
-    if (origin.post_id === recent.post_id) {
+    if (origin.post_id != recent.post_id) {
         const message = pushMsg(recent)
         const id = await getLineId()
         for (let i = 0; i < id.length; i++) {
