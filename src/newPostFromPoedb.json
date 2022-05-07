@@ -1,30 +1,39 @@
 {
-    "type": "bubble",
-    "hero": {
-        "type": "image",
-        "url": "https://scontent.ftpe7-3.fna.fbcdn.net/v/t31.18172-8/11116573_1431516947156679_2592834439141048769_o.jpg?_nc_cat=108&ccb=1-6&_nc_sid=09cbfe&_nc_ohc=q9yd5vTENkQAX9f0olG&_nc_ht=scontent.ftpe7-3.fna&oh=00_AT-Cfm9i3A-q8UdOH1coxjZJIbg4WpOf1ouxJ0z9n7mXMA&oe=629C82C6",
-        "size": "full",
-        "aspectRatio": "20:13",
-        "aspectMode": "cover",
-        "action": {
-            "type": "uri",
-            "uri": "https://www.facebook.com/poedbtw"
-        }
-    },
-    "body": {
-        "type": "box",
-        "layout": "vertical",
+    "type": "flex",
+    "altText": "通貨查詢",
+    "contents": {
+        "type": "carousel",
         "contents": [
             {
-                "type": "text",
-                "text": "最新消息："
-            },
-            {
-                "type": "text",
-                "text": "default",
-                "weight": "bold",
-                "size": "xl",
-                "align": "center"
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "url": "https://scontent.ftpe7-3.fna.fbcdn.net/v/t31.18172-8/11116573_1431516947156679_2592834439141048769_o.jpg?_nc_cat=108&ccb=1-6&_nc_sid=09cbfe&_nc_ohc=q9yd5vTENkQAX9f0olG&_nc_ht=scontent.ftpe7-3.fna&oh=00_AT-Cfm9i3A-q8UdOH1coxjZJIbg4WpOf1ouxJ0z9n7mXMA&oe=629C82C6",
+                    "size": "full",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "cover",
+                    "action": {
+                        "type": "uri",
+                        "uri": "https://www.facebook.com/poedbtw"
+                    }
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "最新消息："
+                        },
+                        {
+                            "type": "text",
+                            "text": "default",
+                            "weight": "bold",
+                            "size": "xl",
+                            "align": "center"
+                        }
+                    ]
+                }
             }
         ]
     }
