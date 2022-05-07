@@ -3,7 +3,7 @@ require('express-async-errors')
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
-const errMiddleware = require('./middle/error-handler')
+const errMiddleware = require('./middleware/error-handler')
 const reply = require('./controller/replyMsg')
 
 app.use(express.json())

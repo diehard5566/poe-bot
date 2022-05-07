@@ -1,6 +1,6 @@
-const getItemFromGGG = require('../Item')
+const getItemFromGGG = require('../items')
 const { exMods, imMods } = require('./filterMod')
-let tradeAPIStats = require('../../src/tradeAPI-stats.json')
+let tradeAPIStats = require('../../src/tradeAPIStats.json')
 
 // const items = [
 //     {
@@ -91,7 +91,7 @@ let tradeAPIStats = require('../../src/tradeAPI-stats.json')
 // ]
 // storeItem.get('itemFromCharData'). 最後放到items前面
 
-const tranferData = storeItem => {
+const transferData = storeItem => {
     let itemWithNeeded = storeItem
         .get('itemFromCharData')
         .items.filter(e => {
@@ -149,6 +149,6 @@ const tranferData = storeItem => {
     // console.log('explicitModsWithId:', explicitModsWithId)
 }
 
-module.exports = tranferData
+module.exports = transferData
 
-// tranferData()
+// transferData()

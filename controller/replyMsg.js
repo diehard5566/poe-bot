@@ -1,22 +1,22 @@
-const getChar = require('../module/Char')
-const getItemFromGGG = require('../module/Item')
-const allItemURL = require('../module/URLfromGGG')
+require('dotenv').config()
+const getChar = require('../module/characters')
+const allItemURL = require('../module/urlFromGGG')
 const reSponse = require('./resSetting')
-const transferData = require('../module/searchapi/transferData')
-const getItemForSearch = require('../module/searchapi/searchJson')
-const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgForRes/replyForGetItem')
-const replyFlexMsg = require('../src/msgForRes/rlyForFlex')
-const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/rlpForDefault')
+const transferData = require('../module/searchAPI/transferData')
+const getItemForSearch = require('../module/searchAPI/searchJson')
+const getItemFromGGG = require('../module/items')
+const replyFlexMsg = require('../src/msgForRes/replyForFlex').replyFlexMsg
 const logger = require('../src/logger')
 const db = require('../db/connect')
-require('dotenv').config()
+const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgForRes/replyForGetItem')
+const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/replyForDefault')
 const {
     checkAndInsert,
     getAccountFromDB,
     getCharNameFromDB,
     addUrlToDB,
     getUrlFromDB,
-} = require('../module/dbFn/forDBquery')
+} = require('../module/dbutil/forDBquery')
 
 const token = process.env.LINE_ACCESS_TOKEN
 

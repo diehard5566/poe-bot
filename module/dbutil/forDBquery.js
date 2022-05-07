@@ -97,9 +97,9 @@ const getUrlFromDB = async (i, lineUserId, character_name) => {
 //         .catch(err => logger.error(err))
 // }
 
-const getOgPost = async () => {
+const getOriginPost = async () => {
     const res = await db.execute(
-        `SELECT * FROM data_fromPoedb WHERE post_time = (SELECT MAX(post_time) FROM data_fromPoedb)`
+        `SELECT * FROM post_from_fb_poedb WHERE post_time = (SELECT MAX(post_time) FROM post_from_fb_poedb)`
     )
     return res[0][0]
 }
@@ -116,6 +116,6 @@ module.exports = {
     getCharNameFromDB,
     addUrlToDB,
     getUrlFromDB,
-    getOgPost,
+    getOriginPost,
     getLineId,
 }

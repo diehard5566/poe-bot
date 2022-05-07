@@ -1,5 +1,5 @@
 const currencyData = require('../currency.json')
-const getExchange = require('../../module/Exchange')
+const getExchange = require('../../module/exchange')
 // const postFromPoedb = require('../newPostFromPoedb.json')
 // const reqBody = {
 //     destination: 'xxxxxxxxxx',

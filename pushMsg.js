@@ -1,6 +1,6 @@
-const { getOgPost, getLineId } = require('./module/dbFn/forDBquery')
+const { getOriginPost, getLineId } = require('./module/dbutil/forDBquery')
 const logger = require('./src/logger')
-const pushMsg = require('./src/msgForRes/rlyForFlex').pushMsg
+const pushMsg = require('./src/msgForRes/replyForFlex').pushMsg
 const line = require('@line/bot-sdk')
 
 const client = new line.Client({
@@ -21,9 +21,9 @@ function delay(number) {
 }
 
 const finalFn = async () => {
-    const origin = await getOgPost() //get post
+    const origin = await getOriginPost() //get post
     await delay(10000) // 5400000 = wait 1 and half hour
-    const recent = await getOgPost() //get recent post
+    const recent = await getOriginPost() //get recent post
     // logger.info(origin.post_text)
     // logger.info(recent.post_text)
     // logger.info(origin.post_text === recent.post_text)
