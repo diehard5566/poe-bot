@@ -31,8 +31,8 @@ const finalFn = async () => {
         const message = pushMsg(recent)
         const id = await getLineId()
         for (let i = 0; i < id.length; i++) {
-            // console.log(id[i].line_id, message.body.contents[1].text)
-            client.pushMessage(id[i].line_id, message)
+            console.log(id[i].line_id, message)
+            // client.pushMessage(id[i].line_id, message)
         }
     }
     logger.info('no new post... restart fetching DB')
