@@ -70,7 +70,7 @@ const pushMsg = recent => {
         postFromPoedb.hero.url = post_img
     }
 
-    postFromPoedb.body.contents[1].text = post_text
+    postFromPoedb.contents.contents[0].body.contents[1].text = post_text
 
     const message = postFromPoedb
 
