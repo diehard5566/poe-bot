@@ -35,6 +35,7 @@ const finalFn = async () => {
             client.pushMessage(id[i].line_id, message)
         }
     }
+    logger.info('no new post... restart fetching DB')
     setTimeout(finalFn, 1000)
 }
 
