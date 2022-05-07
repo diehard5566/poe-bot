@@ -83,10 +83,39 @@ const getUrlFromDB = async (i, lineUserId, character_name) => {
         })
 }
 
+// const getOgPost = async () => {
+//     return await db
+//         .execute(
+//             `SELECT * FROM data_fromPoedb
+//     WHERE post_time = (
+//     SELECT MAX(post_time) FROM data_fromPoedb)`
+//         )
+//         .then(data => {
+//             // console.log('測試：', data[0][0])
+//             return data[0][0]
+//         })
+//         .catch(err => logger.error(err))
+// }
+
+const getOgPost = async () => {
+    const res = await db.execute(
+        `SELECT * FROM data_fromPoedb WHERE post_time = (SELECT MAX(post_time) FROM data_fromPoedb)`
+    )
+    return res[0][0]
+}
+
+const getLineId = async () => {
+    const res = await db.execute(`SELECT line_id FROM main`)
+    // console.log(res[0])
+    return res[0]
+}
+
 module.exports = {
     checkAndInsert,
     getAccountFromDB,
     getCharNameFromDB,
     addUrlToDB,
     getUrlFromDB,
+    getOgPost,
+    getLineId,
 }

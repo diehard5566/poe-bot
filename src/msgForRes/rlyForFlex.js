@@ -1,5 +1,6 @@
 const currencyData = require('../currency.json')
 const getExchange = require('../../module/Exchange')
+const postFromPoedb = require('../newPostFromPoedb.json')
 // const reqBody = {
 //     destination: 'xxxxxxxxxx',
 //     events: [
@@ -61,6 +62,23 @@ const replyFlexMsg = async reqBody => {
     return sendData
 }
 
-module.exports = replyFlexMsg
+const pushMsg = recent => {
+    const post_text = recent.post_text
+    const post_img = recent.post_img
 
+    if (post_img != null) {
+        postFromPoedb.hero.url = post_img
+    }
+
+    postFromPoedb.body.contents[1].text = post_text
+
+    const message = postFromPoedb
+
+    return message
+}
+
+module.exports = {
+    replyFlexMsg,
+    pushMsg,
+}
 // replyFlexMsg(reqBody)
