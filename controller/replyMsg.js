@@ -23,6 +23,7 @@ const {
     getCharNameFromDB,
     addUrlToDB,
     getUrlFromDB,
+    addLineIDToDB,
 } = require('../module/dbutil/forDBquery')
 
 const token = process.env.LINE_ACCESS_TOKEN
@@ -214,6 +215,8 @@ const replyMsg = async (reqBody, res) => {
 
             //command
         } else if (commandParam[0] === '指令') {
+            addLineIDToDB(lineUserId)
+
             const dataString = replyForCommand(reqBody)
             logger.info(dataString)
 

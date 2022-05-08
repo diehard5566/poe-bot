@@ -1,0 +1,34 @@
+{
+    "Resource": {
+        "archemesis": {
+            "img": "https://ppt.cc/fvNcVx",
+            "post": "https://ppt.cc/fAkTFx"
+        },
+        "leveling": {
+            "doc": "https://ppt.cc/fhbVMx",
+            "web": "https://poe-leveling.com/",
+            "youtube": "https://ppt.cc/fmFqlx"
+        },
+        "heist": {
+            "youtube": "https://ppt.cc/fRkQTx",
+            "docEN": "https://ppt.cc/fM31fx",
+            "docTWGoogleTranslate": "https://ppt.cc/fyhW7x"
+        },
+        "harvest": {
+            "post": "https://ppt.cc/f15VXx"
+        },
+        "lab": {
+            "post": "https://ppt.cc/fEfoFx",
+            "cheatSheet": "https://ppt.cc/fAv5Dx",
+            "tool": "https://github.com/bnorick/labbie"
+        },
+        "earnCurrency": {
+            "casualExileGuideByPOM": "https://ppt.cc/fGzxux",
+            "coe": "https://www.craftofexile.com/",
+            "poeProfit": "https://www.poeprofit.com/",
+            "currencyData": "https://poe-antiquary.xyz/",
+            "chaosRecipe": "https://github.com/kosace/EnhancePoEApp",
+            "youtube": "https://ppt.cc/fSIurx"
+        }
+    }
+}

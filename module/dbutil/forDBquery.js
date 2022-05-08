@@ -110,6 +110,20 @@ const getLineId = async () => {
     return res[0]
 }
 
+const addLineIDToDB = async lineUserId => {
+    await db
+        .execute(
+            `INSERT INTO main (line_id) VALUES('${lineUserId}')
+            ON DUPLICATE KEY UPDATE line_id='${lineUserId}'`
+        )
+        .then(data => {
+            logger.info('Process done!')
+        })
+        .catch(err => {
+            logger.error(err)
+        })
+}
+
 module.exports = {
     checkAndInsert,
     getAccountFromDB,
@@ -118,4 +132,5 @@ module.exports = {
     getUrlFromDB,
     getOriginPost,
     getLineId,
+    addLineIDToDB,
 }

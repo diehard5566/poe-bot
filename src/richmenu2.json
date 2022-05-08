@@ -1,0 +1,83 @@
+{
+    "size": {
+        "width": 2500,
+        "height": 1686
+    },
+    "selected": true,
+    "name": "圖文選單 1",
+    "chatBarText": "查看更多資訊",
+    "areas": [
+        {
+            "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 841,
+                "height": 826
+            },
+            "action": {
+                "type": "message",
+                "text": "宿敵"
+            }
+        },
+        {
+            "bounds": {
+                "x": 843,
+                "y": 3,
+                "width": 785,
+                "height": 824
+            },
+            "action": {
+                "type": "message",
+                "text": "章節"
+            }
+        },
+        {
+            "bounds": {
+                "x": 1628,
+                "y": 0,
+                "width": 871,
+                "height": 827
+            },
+            "action": {
+                "type": "message",
+                "text": "搶劫"
+            }
+        },
+        {
+            "bounds": {
+                "x": 3,
+                "y": 830,
+                "width": 843,
+                "height": 852
+            },
+            "action": {
+                "type": "message",
+                "text": "花園"
+            }
+        },
+        {
+            "bounds": {
+                "x": 846,
+                "y": 826,
+                "width": 785,
+                "height": 859
+            },
+            "action": {
+                "type": "message",
+                "text": "迷宮"
+            }
+        },
+        {
+            "bounds": {
+                "x": 1634,
+                "y": 823,
+                "width": 863,
+                "height": 863
+            },
+            "action": {
+                "type": "message",
+                "text": "發大財"
+            }
+        }
+    ]
+}
