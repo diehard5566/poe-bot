@@ -16,6 +16,12 @@ const {
     replyForAccountPrompt,
     replyForTodayLab,
     replyForAbout,
+    replyForArchemesis,
+    replyForLeveling,
+    replyForHeist,
+    replyForHarvest,
+    replyForLab,
+    replyForEarnCurrency,
 } = require('../src/msgForRes/replyForDefault')
 const {
     checkAndInsert,
@@ -246,6 +252,40 @@ const replyMsg = async (reqBody, res) => {
             //about bot
         } else if (commandParam[0] === 'about') {
             const dataString = replyForAbout(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+
+            //archemesis
+        } else if (commandParam[0] === '宿敵') {
+            const dataString = replyForArchemesis(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+
+            //leveling
+        } else if (commandParam[0] === '章節') {
+            const dataString = replyForLeveling(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+        } else if (commandParam[0] === '搶劫') {
+            const dataString = replyForHeist(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+        } else if (commandParam[0] === '花園') {
+            const dataString = replyForHarvest(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+        } else if (commandParam[0] === '迷宮') {
+            const dataString = replyForLab(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+        } else if (commandParam[0] === '發大財') {
+            const dataString = replyForEarnCurrency(reqBody)
             logger.info(dataString)
 
             response(dataString, token)

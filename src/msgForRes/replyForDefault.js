@@ -1,3 +1,6 @@
+const res = require('express/lib/response')
+const resource = require('../resouce.json')
+
 const replyDefaultMsg = reqBody => {
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
@@ -143,6 +146,127 @@ const replyForAbout = reqBody => {
     })
 }
 
+//resource
+const replyForArchemesis = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'image',
+                originalContentUrl: resource.Resource.archemesis.img,
+                previewImageUrl: resource.Resource.archemesis.img,
+            },
+            {
+                type: 'text',
+                text: `${resource.Resource.archemesis.post}`,
+            },
+        ],
+    })
+}
+const replyForLeveling = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: `Act1-10路線： ${resource.Resource.leveling.doc}`,
+            },
+            {
+                type: 'text',
+                text: `YT: ${resource.Resource.leveling.youtube}`,
+            },
+            {
+                type: 'text',
+                text: resource.Resource.leveling.web,
+            },
+            {
+                type: 'text',
+                text: resource.Resource.leveling.youtubeTY,
+            },
+        ],
+    })
+}
+const replyForHeist = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: `YT： ${resource.Resource.heist.youtube}`,
+            },
+            {
+                type: 'text',
+                text: `攻略(EN)： ${resource.Resource.heist.docEN}`,
+            },
+            {
+                type: 'text',
+                text: `攻略(TW)： ${resource.Resource.heist.docTWGoogleTranslate}`,
+            },
+        ],
+    })
+}
+const replyForHarvest = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: `巴哈攻略：${resource.Resource.harvest.post}`,
+            },
+        ],
+    })
+}
+const replyForLab = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: `巴哈攻略：${resource.Resource.lab.post}`,
+            },
+            {
+                type: 'text',
+                text: `基底表單：${resource.Resource.lab.cheatSheet}`,
+            },
+            {
+                type: 'text',
+                text: `必備工具：${resource.Resource.lab.tool}`,
+            },
+        ],
+    })
+}
+const replyForEarnCurrency = reqBody => {
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: `休閒玩家：${resource.Resource.earnCurrency.casualExileGuideByPOM}`,
+            },
+            {
+                type: 'text',
+                text: `打鐵模擬器：${resource.Resource.earnCurrency.coe}`,
+            },
+            {
+                type: 'text',
+                text: `收益試算：${resource.Resource.earnCurrency.poeProfit}`,
+            },
+            {
+                type: 'text',
+                text: `物價指數：${resource.Resource.earnCurrency.currencyData}`,
+            },
+            {
+                type: 'text',
+                text: `搬磚工具：${resource.Resource.earnCurrency.chaosRecipe}`,
+            },
+            {
+                type: 'text',
+                text: `推薦YTber：${resource.Resource.earnCurrency.youtube}`,
+            },
+        ],
+    })
+}
+
 module.exports = {
     replyDefaultMsg,
     replyForCommand,
@@ -150,4 +274,10 @@ module.exports = {
     replyForAccountPrompt,
     replyForTodayLab,
     replyForAbout,
+    replyForArchemesis,
+    replyForLeveling,
+    replyForHeist,
+    replyForHarvest,
+    replyForLab,
+    replyForEarnCurrency,
 }
