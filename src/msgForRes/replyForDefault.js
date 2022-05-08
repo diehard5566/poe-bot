@@ -78,7 +78,7 @@ const replyForAbout = reqBody => {
         messages: [
             {
                 type: 'text',
-                text: '本程式資料來源自：' + '\n' + '1.Grinding Gear Games' + '\n' + 'poe.ninja' + '\n' + 'poedbtw',
+                text: '本程式資料來源自：' + '\n' + '# Grinding Gear Games' + '\n' + '# poe.ninja' + '\n' + '# poedbtw',
             },
             {
                 type: 'text',
