@@ -16,7 +16,7 @@ const replyForCharInfo = (reqBody, accountName, leagueData, nameInOrderList) => 
             },
             {
                 type: 'text',
-                text: '接著請輸入：編號+空格+角色編號 例如："編號 2"',
+                text: '接著請輸入：編號+空格+角色編號數字 例如："編號 2"',
             },
             {
                 type: 'text',

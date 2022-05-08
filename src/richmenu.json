@@ -1,0 +1,83 @@
+{
+    "size": {
+        "width": 2500,
+        "height": 1686
+    },
+    "selected": true,
+    "name": "poebot-richmenu",
+    "chatBarText": "查看更多資訊",
+    "areas": [
+        {
+            "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 841,
+                "height": 826
+            },
+            "action": {
+                "type": "message",
+                "text": "指令"
+            }
+        },
+        {
+            "bounds": {
+                "x": 843,
+                "y": 3,
+                "width": 785,
+                "height": 824
+            },
+            "action": {
+                "type": "message",
+                "text": "稽查"
+            }
+        },
+        {
+            "bounds": {
+                "x": 1628,
+                "y": 0,
+                "width": 871,
+                "height": 827
+            },
+            "action": {
+                "type": "message",
+                "text": "通貨"
+            }
+        },
+        {
+            "bounds": {
+                "x": 3,
+                "y": 830,
+                "width": 843,
+                "height": 852
+            },
+            "action": {
+                "type": "message",
+                "text": "連結"
+            }
+        },
+        {
+            "bounds": {
+                "x": 846,
+                "y": 826,
+                "width": 785,
+                "height": 859
+            },
+            "action": {
+                "type": "message",
+                "text": "lab"
+            }
+        },
+        {
+            "bounds": {
+                "x": 1634,
+                "y": 823,
+                "width": 863,
+                "height": 863
+            },
+            "action": {
+                "type": "message",
+                "text": "about"
+            }
+        }
+    ]
+}

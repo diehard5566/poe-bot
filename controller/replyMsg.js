@@ -9,7 +9,14 @@ const replyFlexMsg = require('../src/msgForRes/replyForFlex').replyFlexMsg
 const logger = require('../src/logger')
 const db = require('../db/connect')
 const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgForRes/replyForGetItem')
-const { replyDefaultMsg, replyForCommand } = require('../src/msgForRes/replyForDefault')
+const {
+    replyDefaultMsg,
+    replyForCommand,
+    replyForRecourse,
+    replyForAccountPrompt,
+    replyForTodayLab,
+    replyForAbout,
+} = require('../src/msgForRes/replyForDefault')
 const {
     checkAndInsert,
     getAccountFromDB,
@@ -202,12 +209,42 @@ const replyMsg = async (reqBody, res) => {
         } else if (commandParam[0] === '通貨') {
             const dataString = await replyFlexMsg(reqBody)
             logger.info(dataString)
+
             response(dataString, token)
 
             //command
         } else if (commandParam[0] === '指令') {
             const dataString = replyForCommand(reqBody)
             logger.info(dataString)
+
+            response(dataString, token)
+
+            //useful link
+        } else if (commandParam[0] === '連結') {
+            const dataString = replyForRecourse(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+
+            //account prompt
+        } else if (commandParam[0] === '稽查') {
+            const dataString = replyForAccountPrompt(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+
+            //todays lab
+        } else if (commandParam[0] === 'lab') {
+            const dataString = replyForTodayLab(reqBody)
+            logger.info(dataString)
+
+            response(dataString, token)
+
+            //about bot
+        } else if (commandParam[0] === 'about') {
+            const dataString = replyForAbout(reqBody)
+            logger.info(dataString)
+
             response(dataString, token)
         }
         // default msg
