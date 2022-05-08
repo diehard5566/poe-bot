@@ -4,63 +4,51 @@
         "height": 1686
     },
     "selected": true,
-    "name": "圖文選單 2",
+    "name": "richmenu-a",
     "chatBarText": "查看更多資訊",
     "areas": [
         {
             "bounds": {
                 "x": 0,
                 "y": 0,
-                "width": 841,
-                "height": 826
+                "width": 890,
+                "height": 887
             },
             "action": {
                 "type": "message",
-                "text": "宿敵"
+                "text": "指令"
             }
         },
         {
             "bounds": {
-                "x": 843,
-                "y": 3,
-                "width": 785,
-                "height": 824
-            },
-            "action": {
-                "type": "message",
-                "text": "章節"
-            }
-        },
-        {
-            "bounds": {
-                "x": 1628,
+                "x": 890,
                 "y": 0,
-                "width": 871,
-                "height": 827
+                "width": 770,
+                "height": 881
             },
             "action": {
                 "type": "message",
-                "text": "搶劫"
+                "text": "稽查"
             }
         },
         {
             "bounds": {
-                "x": 3,
-                "y": 830,
-                "width": 843,
-                "height": 852
+                "x": 1661,
+                "y": 3,
+                "width": 839,
+                "height": 881
             },
             "action": {
                 "type": "message",
-                "text": "花園"
+                "text": "通貨"
             }
         },
         {
             "bounds": {
-                "x": 846,
-                "y": 826,
-                "width": 785,
-                "height": 859
+                "x": 6,
+                "y": 880,
+                "width": 887,
+                "height": 806
             },
             "action": {
                 "type": "message",
@@ -69,14 +57,27 @@
         },
         {
             "bounds": {
-                "x": 1634,
-                "y": 823,
-                "width": 863,
-                "height": 863
+                "x": 890,
+                "y": 881,
+                "width": 771,
+                "height": 805
             },
             "action": {
                 "type": "message",
-                "text": "發大財"
+                "text": "關於"
+            }
+        },
+        {
+            "bounds": {
+                "x": 1661,
+                "y": 881,
+                "width": 839,
+                "height": 805
+            },
+            "action": {
+                "type": "richmenuswitch",
+                "richMenuAliasId": "richmenu-alias-b",
+                "data": "richmenu-changed-to-b"
             }
         }
     ]

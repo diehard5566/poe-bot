@@ -48,13 +48,13 @@ const replyForCommand = reqBody => {
                     '\n' +
                     '4.本日迷宮 ↓' +
                     '\n' +
-                    '請輸入：lab' +
+                    '請輸入：迷宮' +
                     '\n' +
                     '----------------' +
                     '\n' +
                     '5.關於BOT ↓' +
                     '\n' +
-                    '請輸入：about',
+                    '請輸入：關於',
             },
         ],
     })
@@ -84,20 +84,20 @@ const replyForRecourse = reqBody => {
                     '請輸入：搶劫' +
                     '\n' +
                     '----------------' +
+                    // '\n' +
+                    // '4.查詢花園策略 ↓' +
+                    // '\n' +
+                    // '請輸入：花園' +
+                    // '\n' +
+                    // '----------------' +
                     '\n' +
-                    '4.查詢花園策略 ↓' +
+                    '4.查詢迷宮攻略 ↓' +
                     '\n' +
-                    '請輸入：花園' +
+                    '請輸入：迷宮攻略' +
                     '\n' +
                     '----------------' +
                     '\n' +
-                    '5.查詢迷宮攻略 ↓' +
-                    '\n' +
-                    '請輸入：迷宮' +
-                    '\n' +
-                    '----------------' +
-                    '\n' +
-                    '6.查詢賺錢策略 ↓' +
+                    '5.查詢賺錢策略 ↓' +
                     '\n' +
                     '請輸入：發大財',
             },
@@ -135,7 +135,16 @@ const replyForAbout = reqBody => {
         messages: [
             {
                 type: 'text',
-                text: '本程式資料來源自：' + '\n' + '# Grinding Gear Games' + '\n' + '# poe.ninja' + '\n' + '# poedbtw',
+                text:
+                    '本程式資料來源自：' +
+                    '\n' +
+                    '# Grinding Gear Games' +
+                    '\n' +
+                    '# poe.ninja' +
+                    '\n' +
+                    '# poedbtw' +
+                    '\n' +
+                    '# 巴哈姆特',
             },
             {
                 type: 'text',
@@ -207,17 +216,17 @@ const replyForHeist = reqBody => {
         ],
     })
 }
-const replyForHarvest = reqBody => {
-    return JSON.stringify({
-        replyToken: reqBody.events[0].replyToken,
-        messages: [
-            {
-                type: 'text',
-                text: `巴哈攻略：${resource.Resource.harvest.post}`,
-            },
-        ],
-    })
-}
+// const replyForHarvest = reqBody => {
+//     return JSON.stringify({
+//         replyToken: reqBody.events[0].replyToken,
+//         messages: [
+//             {
+//                 type: 'text',
+//                 text: `巴哈攻略：${resource.Resource.harvest.post}`,
+//             },
+//         ],
+//     })
+// }
 const replyForLab = reqBody => {
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
@@ -275,7 +284,7 @@ module.exports = {
     replyForArchemesis,
     replyForLeveling,
     replyForHeist,
-    replyForHarvest,
+    // replyForHarvest,
     replyForLab,
     replyForEarnCurrency,
 }

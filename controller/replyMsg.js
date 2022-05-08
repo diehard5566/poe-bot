@@ -243,14 +243,14 @@ const replyMsg = async (reqBody, res) => {
             response(dataString, token)
 
             //todays lab
-        } else if (commandParam[0] === 'lab') {
+        } else if (commandParam[0] === '迷宮') {
             const dataString = replyForTodayLab(reqBody)
             logger.info(dataString)
 
             response(dataString, token)
 
             //about bot
-        } else if (commandParam[0] === 'about') {
+        } else if (commandParam[0] === '關於') {
             const dataString = replyForAbout(reqBody)
             logger.info(dataString)
 
@@ -274,12 +274,15 @@ const replyMsg = async (reqBody, res) => {
             logger.info(dataString)
 
             response(dataString, token)
-        } else if (commandParam[0] === '花園') {
-            const dataString = replyForHarvest(reqBody)
-            logger.info(dataString)
+        }
+        //not using right now
+        // else if (commandParam[0] === '花園') {
+        //     const dataString = replyForHarvest(reqBody)
+        //     logger.info(dataString)
 
-            response(dataString, token)
-        } else if (commandParam[0] === '迷宮') {
+        //     response(dataString, token)
+        // }
+        else if (commandParam[0] === '迷宮攻略') {
             const dataString = replyForLab(reqBody)
             logger.info(dataString)
 
