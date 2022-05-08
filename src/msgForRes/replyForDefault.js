@@ -261,10 +261,6 @@ const replyForEarnCurrency = reqBody => {
                 type: 'text',
                 text: `搬磚工具：${resource.Resource.earnCurrency.chaosRecipe}`,
             },
-            {
-                type: 'text',
-                text: `推薦YTber：${resource.Resource.earnCurrency.youtube}`,
-            },
         ],
     })
 }
