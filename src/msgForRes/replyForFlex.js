@@ -63,23 +63,30 @@ const replyFlexMsg = async reqBody => {
 }
 
 const pushMsg = recent => {
-    const postFromPoedb = {
+    let postFromPoedb = {
         type: 'text',
         text: 'default',
     }
-
     const post_text = recent.post_text
-    const post_img = recent.post_img
+    const post_img = recent.image
 
-    // if (post_img != null) {
-    //     postFromPoedb.contents.contents[0].hero.url = post_img
-    // }
+    if (post_img != null) {
+        postFromPoedb = [
+            {
+                type: 'text',
+                text: 'default',
+            },
+            {
+                type: 'image',
+                originalContentUrl: post_img,
+                previewImageUrl: post_img,
+            },
+        ]
 
-    postFromPoedb.text = '最新消息(from poedbTW):' + post_text
-
-    // const msg = {
-    //     messages: [postFromPoedb],
-    // }
+        postFromPoedb[0].text = '最新消息(from poedbTW):' + post_text
+    } else {
+        postFromPoedb.text = '最新消息(from poedbTW):' + post_text
+    }
 
     return postFromPoedb
 }
