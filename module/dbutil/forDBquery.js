@@ -124,6 +124,24 @@ const addLineIDToDB = async lineUserId => {
         })
 }
 
+const addUberLabImageToDB = async (currentDate, imageLink) => {
+    await db
+        .execute(`INSERT INTO uber_lab_everyday (day_time,image_link) VALUES('${currentDate}','${imageLink}')`)
+        .then(data => {
+            logger.info('Process done!')
+        })
+        .catch(err => {
+            logger.error(err)
+        })
+}
+
+const getLabImgFromDB = async () => {
+    const res = await db.execute(
+        `SELECT * FROM uber_lab_everyday  WHERE day_time = (SELECT MAX(day_time) FROM uber_lab_everyday); `
+    )
+    return res[0][0]
+}
+
 module.exports = {
     checkAndInsert,
     getAccountFromDB,
@@ -133,4 +151,6 @@ module.exports = {
     getOriginPost,
     getLineId,
     addLineIDToDB,
+    addUberLabImageToDB,
+    getLabImgFromDB,
 }

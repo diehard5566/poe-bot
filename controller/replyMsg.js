@@ -244,7 +244,7 @@ const replyMsg = async (reqBody, res) => {
 
             //todays lab
         } else if (commandParam[0] === '迷宮') {
-            const dataString = replyForTodayLab(reqBody)
+            const dataString = await replyForTodayLab(reqBody)
             logger.info(dataString)
 
             response(dataString, token)

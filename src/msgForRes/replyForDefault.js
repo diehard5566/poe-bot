@@ -1,5 +1,7 @@
 const res = require('express/lib/response')
+const logger = require('../logger')
 const resource = require('../resouce.json')
+const getLabImgFromDB = require('../../module/dbutil/forDBquery').getLabImgFromDB
 
 const replyDefaultMsg = reqBody => {
     return JSON.stringify({
@@ -117,13 +119,18 @@ const replyForAccountPrompt = reqBody => {
     })
 }
 
-const replyForTodayLab = reqBody => {
+const replyForTodayLab = async reqBody => {
+    const uberLab = await getLabImgFromDB()
+
+    console.log('debug:---------', uberLab.image_link)
+
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
         messages: [
             {
-                type: 'text',
-                text: `本功能尚未開發,coming soon...`,
+                type: 'image',
+                originalContentUrl: uberLab.image_link,
+                previewImageUrl: uberLab.image_link,
             },
         ],
     })
