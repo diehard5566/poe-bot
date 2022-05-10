@@ -30,3 +30,7 @@ About Path of Exile LINE bot to quickly fetch data from offical website or poe.n
 -   因 LINE 限制，預計將自動推送功能搬至 notify。
 -   將查詢通貨功能細分為大、小通貨。
 -   優化裝備查詢功能
+
+## 免責聲明
+
+-   This product is fan-made and not affiliated with Grinding Gear Games in any way.

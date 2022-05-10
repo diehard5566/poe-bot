@@ -122,19 +122,22 @@ const replyForAccountPrompt = reqBody => {
 const replyForTodayLab = async reqBody => {
     const uberLab = await getLabImgFromDB()
 
-    console.log('debug:---------', uberLab.image_link)
-
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
         messages: [
             {
-                type: 'image',
-                originalContentUrl: uberLab.image_link,
-                previewImageUrl: uberLab.image_link,
+                type: 'text',
+                text: `維修中...`,
             },
         ],
     })
 }
+
+// {
+//     type: 'image',
+//     originalContentUrl: uberLab.image_link,
+//     previewImageUrl: uberLab.image_link,
+// },
 
 const replyForAbout = reqBody => {
     return JSON.stringify({
