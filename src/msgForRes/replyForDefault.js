@@ -121,6 +121,7 @@ const replyForAccountPrompt = reqBody => {
 
 const replyForTodayLab = async reqBody => {
     const uberLab = await getLabImgFromDB()
+    console.log('我是From Default：', uberLab)
 
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,

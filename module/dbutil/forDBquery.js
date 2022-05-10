@@ -137,10 +137,10 @@ const addUberLabImageToDB = async (currentDate, imageLink) => {
 
 const getLabImgFromDB = async () => {
     const res = await db.execute(
-        `SELECT * FROM uber_lab_everyday  WHERE day_time = (SELECT MAX(day_time) FROM uber_lab_everyday); `
+        `SELECT image_link FROM uber_lab_everyday  WHERE day_time = (SELECT MAX(day_time) FROM uber_lab_everyday); `
     )
 
-    console.log(res[0][0])
+    // console.log(res[0])
     return res[0][0]
 }
 
