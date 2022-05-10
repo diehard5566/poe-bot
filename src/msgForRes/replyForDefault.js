@@ -125,9 +125,14 @@ const replyForTodayLab = async reqBody => {
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
         messages: [
+            // {
+            //     type: 'text',
+            //     text: `維修中...`,
+            // },
             {
-                type: 'text',
-                text: `維修中...`,
+                type: 'image',
+                originalContentUrl: uberLab.image_link,
+                previewImageUrl: uberLab.image_link,
             },
         ],
     })
