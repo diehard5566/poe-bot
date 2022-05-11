@@ -1,5 +1,7 @@
 const currencyData = require('../currency.json')
 const getExchange = require('../../module/exchange')
+const getExchangeTest = require('../../module/exchangeTest')
+
 // const postFromPoedb = require('../newPostFromPoedb.json')
 // const reqBody = {
 //     destination: 'xxxxxxxxxx',
@@ -42,7 +44,7 @@ const getExchange = require('../../module/exchange')
 // }
 
 const replyFlexMsg = async reqBody => {
-    const currentPrice = await getExchange()
+    const currentPrice = await getExchangeTest()
     // console.log('currentPrice:', currentPrice.Ex)
 
     currencyData.contents.contents[0].body.contents[1].text = `現在鏡子約為${currentPrice.Mirror}個崇高`
