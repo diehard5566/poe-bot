@@ -2,6 +2,7 @@ const res = require('express/lib/response')
 const logger = require('../logger')
 const resource = require('../resouce.json')
 const getLabImgFromDB = require('../../module/dbutil/forDBquery').getLabImgFromDB
+const wheel = require('../../module/wheelForNext')
 
 const replyDefaultMsg = reqBody => {
     return JSON.stringify({
@@ -56,7 +57,13 @@ const replyForCommand = reqBody => {
                     '\n' +
                     '5.關於BOT ↓' +
                     '\n' +
-                    '請輸入：關於',
+                    '請輸入：關於' +
+                    '\n' +
+                    '----------------' +
+                    '\n' +
+                    '6.流派轉盤 ↓' +
+                    '\n' +
+                    '請輸入：下季玩什麼',
             },
         ],
     })
@@ -232,17 +239,18 @@ const replyForHeist = reqBody => {
         ],
     })
 }
-// const replyForHarvest = reqBody => {
-//     return JSON.stringify({
-//         replyToken: reqBody.events[0].replyToken,
-//         messages: [
-//             {
-//                 type: 'text',
-//                 text: `巴哈攻略：${resource.Resource.harvest.post}`,
-//             },
-//         ],
-//     })
-// }
+const replyForWheel = async reqBody => {
+    const pickOne = await wheel()
+    return JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [
+            {
+                type: 'text',
+                text: `下一季就玩${pickOne}了吧,穩的！`,
+            },
+        ],
+    })
+}
 const replyForLab = reqBody => {
     return JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
@@ -300,7 +308,7 @@ module.exports = {
     replyForArchemesis,
     replyForLeveling,
     replyForHeist,
-    // replyForHarvest,
+    replyForWheel,
     replyForLab,
     replyForEarnCurrency,
 }

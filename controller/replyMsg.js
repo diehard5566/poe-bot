@@ -22,6 +22,7 @@ const {
     replyForHarvest,
     replyForLab,
     replyForEarnCurrency,
+    replyForWheel,
 } = require('../src/msgForRes/replyForDefault')
 const {
     checkAndInsert,
@@ -274,15 +275,12 @@ const replyMsg = async (reqBody, res) => {
             logger.info(dataString)
 
             response(dataString, token)
-        }
-        //not using right now
-        // else if (commandParam[0] === '花園') {
-        //     const dataString = replyForHarvest(reqBody)
-        //     logger.info(dataString)
+        } else if (commandParam[0] === '下季玩什麼') {
+            const dataString = await replyForWheel(reqBody)
+            logger.info(dataString)
 
-        //     response(dataString, token)
-        // }
-        else if (commandParam[0] === '迷宮攻略') {
+            response(dataString, token)
+        } else if (commandParam[0] === '迷宮攻略') {
             const dataString = replyForLab(reqBody)
             logger.info(dataString)
 

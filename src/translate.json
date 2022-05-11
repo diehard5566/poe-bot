@@ -1,0 +1,28 @@
+{
+    "top": {
+        "class": {
+            "Necromancer": "死靈",
+            "Elementalist": "元素使",
+            "Occultist": "秘術",
+            "Pathfinder": "追獵",
+            "Saboteur": "破壞者",
+            "Deadeye": "銳眼",
+            "Raider": "俠客",
+            "Inquisitor": "判官",
+            "Berserker": "暴徒",
+            "Champion": "冠軍"
+        },
+        "skill": {
+            "Explosive Arrow": "爆炸箭",
+            "Summon Skeletons": "召喚骷髏",
+            "Vaal Summon Skeletons": "瓦爾召喚骷髏",
+            "Poisonous Concoction": "毒藥瓶",
+            "Lightning Strike": "閃電打擊",
+            "Vaal Lightning Strike": "瓦爾閃電打擊",
+            "Exsanguinate": "抽血",
+            "Seismic Trap": "地裂陷阱",
+            "Spectral Helix": "靈體旋武",
+            "Righteous Fire": "正火"
+        }
+    }
+}
