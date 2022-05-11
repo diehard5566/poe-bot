@@ -31,7 +31,6 @@ let getToDayUberLab = async () => {
     console.log(imageLink)
 
     await browser.close()
-
     // return imageLink
 }
 

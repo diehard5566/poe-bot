@@ -126,7 +126,10 @@ const addLineIDToDB = async lineUserId => {
 
 const addUberLabImageToDB = async (currentDate, imageLink) => {
     await db
-        .execute(`INSERT INTO uber_lab_everyday (day_time,image_link) VALUES('${currentDate}','${imageLink}')`)
+        .execute(
+            `INSERT INTO uber_lab_everyday (day_time,image_link) VALUES('${currentDate}','${imageLink}') 
+            ON DUPLICATE KEY UPDATE image_link = '${imageLink}'`
+        )
         .then(data => {
             logger.info('Process done!')
         })
