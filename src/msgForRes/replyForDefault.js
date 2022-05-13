@@ -18,7 +18,7 @@ const replyDefaultMsg = reqBody => {
             },
             {
                 type: 'text',
-                text: '若要查詢裝備看到這則訊息，請至編年史查詢正確裝備名稱',
+                text: '若在查詢傳奇物品看到這則訊息，請至編年史查詢正確物品名稱',
             },
         ],
     })
