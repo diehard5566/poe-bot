@@ -8,9 +8,9 @@
                 "type": "bubble",
                 "hero": {
                     "type": "image",
-                    "size": "full",
+                    "size": "md",
                     "aspectRatio": "20:13",
-                    "aspectMode": "cover",
+                    "aspectMode": "fit",
                     "action": {
                         "type": "uri",
                         "uri": "http://linecorp.com/"
@@ -23,7 +23,7 @@
                     "contents": [
                         {
                             "type": "text",
-                            "text": "default",
+                            "text": "Stasis Prison",
                             "weight": "bold",
                             "size": "xl",
                             "style": "normal",
@@ -44,16 +44,16 @@
                                             "type": "text",
                                             "text": "價格：",
                                             "color": "#0d0d0d",
-                                            "size": "sm",
+                                            "size": "lg",
                                             "flex": 3,
                                             "weight": "bold"
                                         },
                                         {
                                             "type": "text",
-                                            "text": "1",
+                                            "text": "516.05崇高",
                                             "wrap": true,
                                             "color": "#0d0d0d",
-                                            "size": "sm",
+                                            "size": "lg",
                                             "flex": 10
                                         }
                                     ]
@@ -67,16 +67,16 @@
                                             "type": "text",
                                             "text": "使用率：",
                                             "color": "#0d0d0d",
-                                            "size": "sm",
-                                            "flex": 3,
+                                            "size": "lg",
+                                            "flex": 5,
                                             "weight": "bold"
                                         },
                                         {
                                             "type": "text",
-                                            "text": "1",
+                                            "text": "0.1%",
                                             "wrap": true,
                                             "color": "#0d0d0d",
-                                            "size": "sm",
+                                            "size": "lg",
                                             "flex": 10
                                         }
                                     ]
