@@ -8,7 +8,7 @@
                 "type": "bubble",
                 "hero": {
                     "type": "image",
-                    "size": "md",
+                    "size": "xl",
                     "aspectRatio": "20:13",
                     "aspectMode": "fit",
                     "action": {
