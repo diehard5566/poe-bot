@@ -69,6 +69,10 @@ const replyForCommand = reqBody => {
                     '\n' +
                     '請輸入：下季玩什麼',
             },
+            {
+                type: 'text',
+                text: '7.查詢傳奇物品 ↓' + '\n' + '請輸入：任意傳奇物品的名稱',
+            },
         ],
     })
 }

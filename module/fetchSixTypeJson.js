@@ -6,7 +6,7 @@ const fetchNinjaData = async () => {
     //every 15 minute fetch ninja weapon/armours//accessories/flask/jewel
     let searchType = 'UniqueAccessory'
 
-    const ninjaAPI = `https://poe.ninja/api/data/ItemOverview?league=Archnemesis&language=en&type=`
+    const ninjaAPI = `https://poe.ninja/api/data/ItemOverview?league=Sentinel&language=en&type=`
     const ninjaOption = {
         method: 'GET',
         headers: {
@@ -48,4 +48,3 @@ const fetchNinjaData = async () => {
 }
 
 fetchNinjaData()
-
