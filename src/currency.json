@@ -70,7 +70,7 @@
                             "action": {
                                 "type": "uri",
                                 "label": "買！買！買！(Poe.trade)",
-                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/wlYEm7KIb"
+                                "uri": "https://www.pathofexile.com/trade/exchange/Sentinel/wlYEm7KIb"
                             },
                             "margin": "none",
                             "offsetTop": "none",
@@ -81,7 +81,7 @@
                             "action": {
                                 "type": "uri",
                                 "label": "賣！賣！賣！(Poe.trade)",
-                                "uri": "https://www.pathofexile.com/trade/exchange/Archnemesis/dkpQYEoFJ"
+                                "uri": "https://www.pathofexile.com/trade/exchange/Sentinel/dkpQYEoFJ"
                             },
                             "style": "primary",
                             "margin": "sm"

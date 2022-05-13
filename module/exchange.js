@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 const exchangeInfo = new Map()
 
 const getExchange = async () => {
-    const ninjaAPI = 'https://poe.ninja/api/data/CurrencyHistory?league=Archnemesis&type=Currency&currencyId='
+    const ninjaAPI = 'https://poe.ninja/api/data/CurrencyHistory?league=Sentinel&type=Currency&currencyId='
     const ninjaOption = {
         method: 'GET',
         headers: {

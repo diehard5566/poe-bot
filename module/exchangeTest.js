@@ -12,7 +12,7 @@ client.on('connect', () => {
 client.connect()
 
 const getExchange = async () => {
-    const ninjaAPI = 'https://poe.ninja/api/data/CurrencyHistory?league=Archnemesis&type=Currency&currencyId=' //TODO 要改成新聯盟 Sentinel
+    const ninjaAPI = 'https://poe.ninja/api/data/CurrencyHistory?league=Sentinel&type=Currency&currencyId=' //TODO 要改成新聯盟 Sentinel
     const ninjaOption = {
         method: 'GET',
         headers: {

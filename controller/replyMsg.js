@@ -126,7 +126,7 @@ const replyMsg = async (reqBody, res) => {
 
                     const data = await allItemURL(searchJsonReady)
                     storeInfo.set(`user-${lineUserId}-trade-URL-${data.id}`, data.id)
-                    const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
+                    const trade_URL = `https://www.pathofexile.com/trade/search/Sentinel/${storeInfo.get(
                         `user-${lineUserId}-trade-URL-${data.id}`
                     )}`
                     storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL)

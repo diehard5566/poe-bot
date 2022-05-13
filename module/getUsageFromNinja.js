@@ -35,7 +35,7 @@ const searchItem = async translated => {
         waitUntil: 'networkidle2',
     })
 
-    await page.waitForTimeout(4000)
+    await page.waitForTimeout(2800)
 
     await page.type(`#openSidebar > div > section:nth-child(1) > header > div > input`, `${translated}`)
 

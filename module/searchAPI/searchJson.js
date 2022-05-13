@@ -146,8 +146,6 @@ const getItemForSearchName = async itemsName => {
         },
     }
     try {
-        const itemName = await itemsName
-
         searchJson_Def.query.name = itemsName
 
         console.log('我在searchJson:', searchJson_Def)

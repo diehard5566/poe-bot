@@ -8,7 +8,7 @@ let tradeAPIStats = require('../../src/tradeAPIStats.json')
 //         w: 2,
 //         h: 3,
 //         icon: 'https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9Eb21lT2ZCcmFzcyIsInciOjIsImgiOjMsInNjYWxlIjoxfV0/41f06694f2/DomeOfBrass.png',
-//         league: 'Archnemesis',
+//         league: 'Sentinel',
 //         id: '2c70730cd5fb101f8f6e26f9fd6577255bf6b5d56185ee198208d7f6e70da079',
 //         sockets: [],
 //         name: 'The Brass Dome',
@@ -38,7 +38,7 @@ let tradeAPIStats = require('../../src/tradeAPIStats.json')
 //         w: 2,
 //         h: 3,
 //         icon: 'https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvV2VhcG9ucy9PbmVIYW5kV2VhcG9ucy9TY2VwdGVycy9IZWlzdFNjZXB0cmVFbGVtZW50YWwiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/34e5d78ab3/HeistSceptreElemental.png',
-//         league: 'Archnemesis',
+//         league: 'Sentinel',
 //         id: '9a5b0f43c44077a80ab4b5117ec844e3d76d3a3909937e017668f1ea21bcc8d3',
 //         influences: {
 //             redeemer: true,

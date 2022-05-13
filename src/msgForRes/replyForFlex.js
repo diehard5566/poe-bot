@@ -105,7 +105,7 @@ const replySearchItem = async (reqBody, translated) => {
     const itemPictureUrl = (await getItemPrice(translated)).icon
 
     const searchJsonReady = getItemForSearchName(translated)
-    const priceUrl = await getURLFromGGG(searchJsonReady)
+    const priceUrl = await getURLFromGGG.noDelayURLFromGGG(searchJsonReady)
 
     console.log('我是官網連結', priceUrl)
 

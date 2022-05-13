@@ -23,7 +23,7 @@ const getCharacter = async (reqBody, res, accountName) => {
 
         storeCharInfo.set('dataFromGGG', data)
 
-        let leagueData = storeCharInfo.get('dataFromGGG').filter(el => el.league === 'Archnemesis') //TODO 要改成新聯盟 Sentinel
+        let leagueData = storeCharInfo.get('dataFromGGG').filter(el => el.league === 'Sentinel')
 
         charNameInlist = leagueData.map(el => el.name)
 
