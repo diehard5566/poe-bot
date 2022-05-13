@@ -13,7 +13,7 @@
                     "aspectMode": "fit",
                     "action": {
                         "type": "uri",
-                        "uri": "http://linecorp.com/"
+                        "uri": "https://poe.ninja/challenge/currency"
                     },
                     "url": "https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyDuplicate.png?scale=1&w=1&h=1"
                 },
