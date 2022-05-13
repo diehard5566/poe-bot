@@ -1,5 +1,6 @@
 //im a function
 const fetch = require('node-fetch')
+const items = require('../items')
 
 // const singleItem = {
 //     explicitMods: [
@@ -138,6 +139,27 @@ const getItemForSearch = async singleItem => {
     return searchJson_Def
 }
 
-module.exports = getItemForSearch
+const getItemForSearchName = async itemsName => {
+    const searchJson_Def = {
+        query: {
+            name: '',
+        },
+    }
+    try {
+        const itemName = await itemsName
+
+        searchJson_Def.query.name = itemsName
+
+        console.log('我在searchJson:', searchJson_Def)
+    } catch (error) {
+        console.log(error)
+    }
+
+    return searchJson_Def
+}
+module.exports = {
+    getItemForSearch,
+    getItemForSearchName,
+}
 
 // getItemForSearch(singleItem)

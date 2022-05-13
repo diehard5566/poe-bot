@@ -5,9 +5,10 @@ const response = require('./resSetting')
 const transferData = require('../module/searchAPI/transferData')
 const getItemForSearch = require('../module/searchAPI/searchJson')
 const getItemFromGGG = require('../module/items')
-const replyFlexMsg = require('../src/msgForRes/replyForFlex').replyFlexMsg
+const { replyFlexMsg, replySearchItem } = require('../src/msgForRes/replyForFlex')
 const logger = require('../src/logger')
 const db = require('../db/connect')
+const getItemUsage = require('../module/getUsageFromNinja')
 const { replyForResult, replyForSingle, fetchCompleted } = require('../src/msgForRes/replyForGetItem')
 const {
     replyDefaultMsg,
@@ -41,6 +42,7 @@ const storeInfo = new Map()
 const replyMsg = async (reqBody, res) => {
     const reqBodyMsg = reqBody.events[0].type
     const commandParam = reqBody.events[0].message.text.split(' ')
+    const notCommand = reqBody.events[0].message.text
 
     const lineUserId = reqBody.events[0].source.userId
     let accountName
@@ -90,40 +92,12 @@ const replyMsg = async (reqBody, res) => {
         } else if (commandParam[0] === '編號') {
             accountName = await getAccountFromDB(lineUserId) //TODO 換成從DB拿出來
 
-            // db.execute(
-            //     `SELECT character_name FROM character_info
-            //      WHERE character_num = '${commandParam[1]}' AND line_id = '${lineUserId}'`
-            // )
-            //     .then(data => {
-            //         logger.info(data[0])
-            //     })
-            //     .catch(err => {
-            //         logger.info(err)
-            //     })
-
-            // let charKey = `user-${lineUserId}-charId` + commandParam[1]
-            // console.log('storeInfo MAP: ', storeInfo)
-
-            // dataFromgetChar = await getChar(reqBody, res, accountName)
-            // console.log('dataFromgetChar:', dataFromgetChar)
-
-            // storeInfo.set(charKey, dataFromgetChar[1][commandParam[1] - 1]) //TODO 換成DB
-
-            let charName = await getCharNameFromDB(commandParam, lineUserId, accountName) //storeInfo.get(charKey) //TODO 換成DB
-
-            // console.log(storeInfo)
+            let charName = await getCharNameFromDB(commandParam, lineUserId, accountName)
 
             const getItem = getItemFromGGG[0]
             let dataString = await getItem(reqBody, res, accountName, charName) //拿到該角色身上裝備
             // logger.info(dataString)
 
-            //send request
-
-            //輸入裝備編號,取得各個裝備的賣場搜尋結果
-
-            // } else if (commandParam[0] === '裝備') {
-
-            // accountName = storeInfo.get(`lineUserId-${lineUserId}`)
             const getAllItem = getItemFromGGG[1]
             // console.log('我是該角色全部裝備data', getAllItem)
 
@@ -142,7 +116,6 @@ const replyMsg = async (reqBody, res) => {
                 }
 
                 let allItem
-                // let allResultURL = []
                 for (let i = 1; i < transferredData.length + 1; i++) {
                     allItem = storeInfo.get(`user-${lineUserId}-item-No${i}`)
                     // console.log('我是存在storeInfo裡的item: ', allItem)
@@ -156,28 +129,10 @@ const replyMsg = async (reqBody, res) => {
                     const trade_URL = `https://www.pathofexile.com/trade/search/Archnemesis/${storeInfo.get(
                         `user-${lineUserId}-trade-URL-${data.id}`
                     )}`
-                    storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL) //TODO 換成DB
+                    storeInfo.set(`user-${lineUserId}-裝備編號No-${i}`, trade_URL)
 
                     addUrlToDB(lineUserId, i, trade_URL, charName)
-
-                    // allResultURL.push(`裝備編號No-${i}: ${trade_URL}` + '\n')
                 }
-
-                //這段目前沒用 應該是因為沒有收到commandParam
-                // if (allResultURL) {
-                //     const completedMsg = fetchCompleted(reqBody)
-
-                //     console.log(completedMsg)
-                //     response(completedMsg, token)
-                // }
-
-                //裝備官方賣場URL
-
-                //TODO:這邊要跟上面合併,打編號直接show出allItemURLFromMap
-                //TODO:所以rlymsg也要一併改動
-
-                // const getAllItem = getItemFromGGG[1]
-                // const transferedData = tranferData(getAllItem)
 
                 const tempitemlength = await db //知道總共有幾個裝備
                     .execute(
@@ -189,7 +144,6 @@ const replyMsg = async (reqBody, res) => {
                         return Object.values(data[0][0])[0]
                     })
                     .catch(err => console.log(err))
-                console.log('-----------', tempitemlength)
 
                 allItemURLFromMap = []
                 for (let i = 1; i < tempitemlength + 1; i++) {
@@ -199,17 +153,8 @@ const replyMsg = async (reqBody, res) => {
                     allItemURLFromMap.push(`裝備編號No-${i}: ${tempUrl}` + '\n')
                 }
 
-                // //讓user選特定裝備
-
-                // if (commandParam[1]) {
-                //     const singleItem = allItemURLFromMap[commandParam[1] - 1] //抓裝備編號
-                //     const dataString = replyForSingle(reqBody, singleItem)
-                //     response(dataString, token)
-                // } else {
                 const finalResString = replyForResult(reqBody, allItemURLFromMap)
                 response(finalResString, token)
-                // }
-
                 logger.info(finalResString)
             }
 
@@ -270,32 +215,58 @@ const replyMsg = async (reqBody, res) => {
             logger.info(dataString)
 
             response(dataString, token)
+
+            //heist
         } else if (commandParam[0] === '搶劫') {
             const dataString = replyForHeist(reqBody)
             logger.info(dataString)
 
             response(dataString, token)
+
+            //wheel
         } else if (commandParam[0] === '下季玩什麼') {
             const dataString = await replyForWheel(reqBody)
             logger.info(dataString)
 
             response(dataString, token)
+
+            //lab guide
         } else if (commandParam[0] === '迷宮攻略') {
             const dataString = replyForLab(reqBody)
             logger.info(dataString)
 
             response(dataString, token)
+
+            //making currency
         } else if (commandParam[0] === '發大財') {
             const dataString = replyForEarnCurrency(reqBody)
             logger.info(dataString)
 
             response(dataString, token)
+        } else if (commandParam[0] === '裝備') {
+            // TODO some function here
         }
         // default msg
         else {
-            const dataString = replyDefaultMsg(reqBody)
-            logger.info(dataString)
-            response(dataString, token)
+            const translateList = require('../src/itemTranslate.json')
+            const translateToEn = translateList.data.filter(e => e.lang === notCommand)
+
+            if (translateToEn.length === 0) {
+                const dataString = replyDefaultMsg(reqBody)
+                logger.info(dataString)
+
+                response(dataString, token)
+            } else {
+                const dataString = await replySearchItem(reqBody, translateToEn[0].us)
+                // const usageAndPrice = await getItemUsage(reqBody, notCommand)
+
+                // const dataString = replyDefaultMsg(reqBody)
+                logger.info(dataString)
+                // logger.info(usageAndPrice)
+
+                response(dataString, token)
+                // response(usageAndPrice, token)
+            }
         }
     }
 }

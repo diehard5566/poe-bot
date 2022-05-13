@@ -16,6 +16,10 @@ const replyDefaultMsg = reqBody => {
                 type: 'text',
                 text: '請輸入："指令"',
             },
+            {
+                type: 'text',
+                text: '若要查詢裝備看到這則訊息，請至編年史查詢正確裝備名稱',
+            },
         ],
     })
 }

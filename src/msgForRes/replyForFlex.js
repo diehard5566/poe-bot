@@ -1,6 +1,11 @@
 const currencyData = require('../currency.json')
 const getExchange = require('../../module/exchange')
 const getExchangeTest = require('../../module/exchangeTest')
+const getItemUsage = require('../../module/getUsageFromNinja')
+const getItemPrice = require('../../module/getItemPrice')
+const flexForSearch = require('../ninjaItemOverView/flexMsgForSearch.json')
+const getURLFromGGG = require('../../module/urlFromGGG')
+const { getItemForSearchName } = require('../../module/searchAPI/searchJson')
 
 // const postFromPoedb = require('../newPostFromPoedb.json')
 // const reqBody = {
@@ -93,8 +98,32 @@ const pushMsg = recent => {
     return postFromPoedb
 }
 
+const replySearchItem = async (reqBody, translated) => {
+    const originMsg = reqBody.events[0].message.text
+    const usage = await getItemUsage(translated)
+    const itemPrice = (await getItemPrice(translated)).price //TODO 這邊可能還要把picture一起export過來
+    const itemPictureUrl = (await getItemPrice(translated)).icon
+
+    const searchJsonReady = getItemForSearchName(translated)
+    const priceUrl = await getURLFromGGG(searchJsonReady)
+
+    console.log('我是官網連結', priceUrl)
+
+    flexForSearch.contents.contents[0].body.contents[0].text = originMsg //name
+    flexForSearch.contents.contents[0].body.contents[1].contents[0].contents[1].text = itemPrice + '崇高' //價格
+    flexForSearch.contents.contents[0].body.contents[1].contents[1].contents[1].text = usage + '%' //使用率
+    flexForSearch.contents.contents[0].hero.url = itemPictureUrl
+    const sendData = JSON.stringify({
+        replyToken: reqBody.events[0].replyToken,
+        messages: [flexForSearch],
+    })
+
+    return sendData
+}
+
 module.exports = {
     replyFlexMsg,
     pushMsg,
+    replySearchItem,
 }
 // replyFlexMsg(reqBody)

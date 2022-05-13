@@ -1,0 +1,111 @@
+{
+    "type": "flex",
+    "altText": "物品查詢",
+    "contents": {
+        "type": "carousel",
+        "contents": [
+            {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "size": "full",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "cover",
+                    "action": {
+                        "type": "uri",
+                        "uri": "http://linecorp.com/"
+                    },
+                    "url": "https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyDuplicate.png?scale=1&w=1&h=1"
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "default",
+                            "weight": "bold",
+                            "size": "xl",
+                            "style": "normal",
+                            "align": "center"
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "lg",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "box",
+                                    "layout": "baseline",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "價格：",
+                                            "color": "#0d0d0d",
+                                            "size": "sm",
+                                            "flex": 3,
+                                            "weight": "bold"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "1",
+                                            "wrap": true,
+                                            "color": "#0d0d0d",
+                                            "size": "sm",
+                                            "flex": 10
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "box",
+                                    "layout": "baseline",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "使用率：",
+                                            "color": "#0d0d0d",
+                                            "size": "sm",
+                                            "flex": 3,
+                                            "weight": "bold"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "1",
+                                            "wrap": true,
+                                            "color": "#0d0d0d",
+                                            "size": "sm",
+                                            "flex": 10
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                                "type": "uri",
+                                "label": "賣場連結(Poe.trade)",
+                                "uri": "https://www.pathofexile.com/trade/search/Sentinel"
+                            },
+                            "margin": "none",
+                            "offsetTop": "none",
+                            "offsetStart": "none"
+                        }
+                    ],
+                    "flex": 0
+                }
+            }
+        ]
+    }
+}

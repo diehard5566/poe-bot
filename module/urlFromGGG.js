@@ -21,7 +21,7 @@ const getURLFromGGG = async searchJsonReady => {
         }
         const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
-        const res = await fetch('https://www.pathofexile.com/api/trade/search/Archnemesis', requestOption)
+        const res = await fetch('https://www.pathofexile.com/api/trade/search/Standard', requestOption) //TODO 要改成新聯盟 Sentinel
         await delay(3000)
         const data = await res.json()
 
