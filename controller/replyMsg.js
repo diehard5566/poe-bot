@@ -1,9 +1,9 @@
 require('dotenv').config()
 const getChar = require('../module/characters')
-const allItemURL = require('../module/urlFromGGG')
+const allItemURL = require('../module/urlFromGGG').getURLFromGGG
 const response = require('./resSetting')
 const transferData = require('../module/searchAPI/transferData')
-const getItemForSearch = require('../module/searchAPI/searchJson')
+const getItemForSearch = require('../module/searchAPI/searchJson').getItemForSearch
 const getItemFromGGG = require('../module/items')
 const { replyFlexMsg, replySearchItem } = require('../src/msgForRes/replyForFlex')
 const logger = require('../src/logger')
