@@ -1,6 +1,6 @@
 //im a function
-const fetch = require('node-fetch')
-const items = require('../items')
+const fetch = require("node-fetch")
+const items = require("../items")
 
 // const singleItem = {
 //     explicitMods: [
@@ -17,12 +17,12 @@ const getItemForSearch = async singleItem => {
     const searchJson_Def = {
         query: {
             status: {
-                option: 'online',
+                option: "online",
             },
             stats: [
                 {
                     filters: [],
-                    type: 'and',
+                    type: "and",
                 },
             ],
             // filters: {
@@ -36,7 +36,7 @@ const getItemForSearch = async singleItem => {
             // },
         },
         sort: {
-            price: 'asc',
+            price: "asc",
         },
     }
     try {
@@ -142,13 +142,11 @@ const getItemForSearch = async singleItem => {
 const getItemForSearchName = async itemsName => {
     const searchJson_Def = {
         query: {
-            name: '',
+            name: "",
         },
     }
     try {
         searchJson_Def.query.name = itemsName
-
-        console.log('我在searchJson:', searchJson_Def)
     } catch (error) {
         console.log(error)
     }

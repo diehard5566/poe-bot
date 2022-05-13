@@ -4,9 +4,9 @@ const getExchangeTest = require('../../module/exchangeTest')
 const getItemUsage = require('../../module/getUsageFromNinja')
 const getItemPrice = require('../../module/getItemPrice')
 const flexForSearch = require('../ninjaItemOverView/flexMsgForSearch.json')
-const getURLFromGGG = require('../../module/urlFromGGG')
+const { noDelayURLFromGGG } = require('../../module/urlFromGGG')
 const { getItemForSearchName } = require('../../module/searchAPI/searchJson')
-
+const tradeSite = `https://www.pathofexile.com/trade/search/Sentinel`
 // const postFromPoedb = require('../newPostFromPoedb.json')
 // const reqBody = {
 //     destination: 'xxxxxxxxxx',
@@ -105,14 +105,15 @@ const replySearchItem = async (reqBody, translated) => {
     const itemPictureUrl = (await getItemPrice(translated)).icon
 
     const searchJsonReady = getItemForSearchName(translated)
-    const priceUrl = await getURLFromGGG.noDelayURLFromGGG(searchJsonReady)
-
-    console.log('我是官網連結', priceUrl)
+    const resultFromGGG = await noDelayURLFromGGG(searchJsonReady)
+    const priceUrl = resultFromGGG.id
 
     flexForSearch.contents.contents[0].body.contents[0].text = originMsg //name
     flexForSearch.contents.contents[0].body.contents[1].contents[0].contents[1].text = itemPrice + '崇高' //價格
     flexForSearch.contents.contents[0].body.contents[1].contents[1].contents[1].text = usage + '%' //使用率
     flexForSearch.contents.contents[0].hero.url = itemPictureUrl
+    flexForSearch.contents.contents[0].footer.contents[0].action.uri = tradeSite + '/' + priceUrl
+
     const sendData = JSON.stringify({
         replyToken: reqBody.events[0].replyToken,
         messages: [flexForSearch],

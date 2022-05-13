@@ -41,9 +41,10 @@ const noDelayURLFromGGG = async searchJsonReady => {
                 'User-Agent': 'OAuth poe-bot/1.0.0 (contact: shihyao001@gmail.com)',
                 cookie: 'POESESSID=8e94ba6fc620c449c8d282dcad438ab4',
             },
-            body: JSON.stringify(searchJsonReady),
+            body: JSON.stringify(await searchJsonReady),
         }
 
+        // console.log(requestOption)
         const res = await fetch('https://www.pathofexile.com/api/trade/search/Sentinel', requestOption)
         const data = await res.json()
 
