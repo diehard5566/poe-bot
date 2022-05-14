@@ -15,7 +15,7 @@ const getItemUsage = async translated => {
 
     if (!searchResult) {
         const usage = await searchItem(translated)
-        await client.setEx(translated, 3600, usage)
+        await client.setEx(translated, 43200, usage)
 
         searchResult = await client.get(`${translated}`)
     }
