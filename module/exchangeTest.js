@@ -37,20 +37,20 @@ const getExchange = async () => {
     const todayExPrice = currentEx
 
     // mirror redis
-    let currentMirror = await client.get('currentMirror')
+    // let currentMirror = await client.get('currentMirror')
 
-    if (currentMirror != null) {
-        logger.info(currentMirror)
-    } else {
-        const res0 = await fetch(ninjaAPI + '22', ninjaOption)
-        const mirror = await res0.json()
-        currentMirror = Math.round(
-            mirror.receiveCurrencyGraphData[mirror.receiveCurrencyGraphData.length - 1].value / Number(currentEx)
-        ).toString()
-        await client.setEx('currentMirror', 30, currentMirror)
-    }
+    // if (currentMirror != null) {
+    //     logger.info(currentMirror)
+    // } else {
+    //     const res0 = await fetch(ninjaAPI + '22', ninjaOption)
+    //     const mirror = await res0.json()
+    //     currentMirror = Math.round(
+    //         mirror.receiveCurrencyGraphData[mirror.receiveCurrencyGraphData.length - 1].value / Number(currentEx)
+    //     ).toString()
+    //     await client.setEx('currentMirror', 30, currentMirror)
+    // }
 
-    const todayMirrorPrice = currentMirror
+    // const todayMirrorPrice = currentMirror
 
     //c
     const chaos = 1
@@ -155,7 +155,7 @@ const getExchange = async () => {
 
     return {
         Ex: todayExPrice,
-        Mirror: todayMirrorPrice,
+        // Mirror: todayMirrorPrice,
         Alt: todayAltPrice,
         Sco: todayScoPrice,
         Fus: todayFusPrice,
