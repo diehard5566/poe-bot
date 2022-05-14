@@ -121,7 +121,7 @@ const replyMsg = async (reqBody, res) => {
                     // console.log('我是存在storeInfo裡的item: ', allItem)
 
                     //把詞綴丟進searchJson function去轉成JSON 最後會回給user的是URL
-                    const searchJsonReady = await getItemForSearch(allItem) //singleItem
+                    const searchJsonReady = await getItemForSearch(allItem)
                     // console.log(i + '.我是要被丟去給ggg的JSON: ', searchJsonReady)
 
                     const data = await allItemURL(searchJsonReady)
